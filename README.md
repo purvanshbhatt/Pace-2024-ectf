@@ -1,5 +1,5 @@
-
-
+# eCTF Pace University
+This repository holds the design for an eCTF MISC system designed by the team at PACE University.
 
 ## Layout
 
