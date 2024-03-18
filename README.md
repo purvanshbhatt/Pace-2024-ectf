@@ -176,7 +176,7 @@ optional arguments:
 
 **Example Utilization**
 ```bash
-ectf_update --infile example_fw/build/firmware.img --port /dev/ttyUSB0
+ectf_update --infile example_fw/build/firmware.img --port /dev/ttyACM0
 ```
 
 ## Host Tools
@@ -198,7 +198,7 @@ options:
 
 **Example Utilization**
 ``` bash
-ectf_list -a /dev/ttyUSB0
+ectf_list -a /dev/ttyACM0
 ```
 
 ### Boot Tool
@@ -218,7 +218,7 @@ options:
 
 **Example Utilization**
 ``` bash
-ectf_boot -a /dev/ttyUSB0
+ectf_boot -a /dev/ttyACM0
 ```
 
 ### Replace Tool
@@ -245,7 +245,7 @@ options:
 
 **Example Utilization**
 ``` bash
-ectf_replace -a /dev/ttyUSB0 -t 0123456789abcdef -i 0x11111126 -o 0x11111125
+ectf_replace -a /dev/ttyACM0 -t 0123456789abcdef -i 0x11111126 -o 0x11111125
 ```
 
 ### Attestation Tool
@@ -269,5 +269,5 @@ options:
 
 **Example Utilization**
 ```
-ectf_attestation -a /dev/ttyUSB0 -p 123456 -c 0x11111124
+ectf_attestation -a /dev/ttyACM0 -p 123456 -c 0x11111124
 ```
