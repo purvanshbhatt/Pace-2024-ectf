@@ -40,8 +40,7 @@
 /********************************* Global Variables **********************************/
 
 // Flash Macros
-#define FLASH_ADDR                                                             \
-    ((MXC_FLASH_MEM_BASE + MXC_FLASH_MEM_SIZE) - (2 * MXC_FLASH_PAGE_SIZE))
+#define FLASH_ADDR  ((MXC_FLASH_MEM_BASE + MXC_FLASH_MEM_SIZE) - (2 * MXC_FLASH_PAGE_SIZE))
 #define FLASH_MAGIC 0xDEADBEEF
 
 // Library call return types
@@ -57,8 +56,6 @@
 uint8_t RAND_Z[RAND_Z_SIZE];
 uint8_t RAND_Y[RAND_Z_SIZE];
 
-uint8_t CP_KEY1[17];
-uint8_t CP_KEY2[17];
 
 // AES Macros
 #define AES_SIZE 16 // 16 bytes
@@ -81,7 +78,7 @@ typedef struct {
     uint8_t comp_ID[4];
     uint8_t rand_z[RAND_Z_SIZE];
     uint8_t rand_y[RAND_Z_SIZE];
-    uint8_t remain[MAX_I2C_MESSAGE_LEN   - 21];
+    uint8_t remain[MAX_I2C_MESSAGE_LEN - 21];
 } message;
 
 // Datatype for information stored in flash
@@ -206,6 +203,10 @@ int secure_send(uint8_t address, uint8_t *buffer, uint8_t len) {
     uint8Arr_to_uint8Arr(RAND_Y, response_ans->rand_y);
     uint8Arr_to_uint8Arr(command->rand_z, RAND_Z);
     uint8Arr_to_uint8Arr(command->rand_y, RAND_Y);
+    if(len > MAX_I2C_MESSAGE_LEN-21){
+        print_error("The message buffer is too long during post boot\n");
+        return ERROR_RETURN;
+    }
     for(int x = 0; x < len; x++){
         command->remain[x] = buffer[x];
     }
@@ -403,9 +404,6 @@ int scan_components() {
         }
 
         // Create command message
-        // message* command = (message*)transmit_buffer;
-
-        // command->opcode = COMPONENT_CMD_SCAN;
         for(int i = 0; i < 16; ++i){
             transmit_buffer[4 * i + 0] = 'B';
             transmit_buffer[4 * i + 1] = 'E';
@@ -452,9 +450,6 @@ int preboot_validate_component_id(){
         }
 
         // Create command message
-        // message* command = (message*)transmit_buffer;
-
-        // command->opcode = COMPONENT_CMD_SCAN;
         for(int i = 0; i < 16; ++i){
             transmit_buffer[4 * i + 0] = 'B';
             transmit_buffer[4 * i + 1] = 'E';
@@ -481,11 +476,9 @@ int preboot_validate_component_id(){
         }
     }
     if(check == flash_status.component_cnt){
-        //print_success("List\n");
         return SUCCESS_RETURN;
     }
     else{
-        //print_error("List\n");
         return ERROR_RETURN;
     }
 }
@@ -524,9 +517,7 @@ int validate_and_boot_components() {
         // Send out command and receive result
         int len = issue_cmd(addr, transmit_buffer, receive_buffer);
         if (len == ERROR_RETURN) {
-            // print_error("Could not validate or boot component:%d\n",i+1);
             print_info("Could not validate or boot component:%08x\n",flash_status.component_ids[i]);
-            // continue;
            return ERROR_RETURN;
         }
 
@@ -608,9 +599,6 @@ int attest_component(uint32_t component_id) {
         return ERROR_RETURN;
     }
     // Print out attestation data
-    // TODO: it was originally right above the SUCCESS_RETURN, if you want
-    // these to keep below the for loop, we need to store the values from
-    // the receive_buffer - AJ
     print_info("C>0x%08x\n", component_id);
     print_info("%s", response->remain);
 
@@ -679,25 +667,29 @@ void boot() {
 
 // Compare the entered PIN to the correct PIN
 int validate_pin() {
-    char buf[50];
+    char buf[128];
+    memset(buf, 0, 128);
     recv_input("Enter pin: ", buf);
-    if (!strncmp(buf, AP_PIN, 6)) { // TODO: 1
+    if (!strncmp(buf, AP_PIN, 6)) {
         print_debug("Pin Accepted!\n");
         return SUCCESS_RETURN;
     }
     print_error("Invalid PIN!\n");
+    MXC_Delay(MXC_DELAY_MSEC(4500));
     return ERROR_RETURN;
 }
 
 // Function to validate the replacement token
 int validate_token() {
-    char buf[50];
+    char buf[128];
+    memset(buf, 0, 128);
     recv_input("Enter token: ", buf);
-    if (!strncmp(buf, AP_TOKEN, 16)) { // TODO: 2
+    if (!strncmp(buf, AP_TOKEN, 16)) {
         print_debug("Token Accepted!\n");
         return SUCCESS_RETURN;
     }
     print_error("Invalid Token!\n");
+    MXC_Delay(MXC_DELAY_MSEC(4500));
     return ERROR_RETURN;
 }
 
@@ -707,7 +699,7 @@ void attempt_boot() {
         print_error("Failed to validate and/or boot components\n");
         return;
     }
-    // print_info("All Components validated\n");
+    // All Components validated
 
     // Print boot message
     // This always needs to be printed when booting
@@ -719,7 +711,7 @@ void attempt_boot() {
 
 // Replace a component if the PIN is correct
 void attempt_replace() {
-    char buf[50];
+    char buf[128];
 
     if (validate_token()) {
         return;
@@ -727,9 +719,10 @@ void attempt_replace() {
 
     uint32_t component_id_in = 0;
     uint32_t component_id_out = 0;
-
+    memset(buf, 0, 128);
     recv_input("Component ID In: ", buf);
     sscanf(buf, "%x", &component_id_in);
+    memset(buf, 0, 128);
     recv_input("Component ID Out: ", buf);
     sscanf(buf, "%x", &component_id_out);
 
@@ -747,7 +740,7 @@ void attempt_replace() {
                         component_id_in);
             print_success("Replace\n");
             return;
-        }
+        }       
     }
 
     // Component Out was not found
@@ -757,12 +750,13 @@ void attempt_replace() {
 
 // Attest a component if the PIN is correct
 void attempt_attest() {
-    char buf[50];
+    char buf[128];
 
     if (validate_pin()) {
         return;
     }
     uint32_t component_id;
+    memset(buf, 0, 128);
     recv_input("Component ID: ", buf);
     sscanf(buf, "%x", &component_id);
     if (attest_component(component_id) == SUCCESS_RETURN) {
@@ -776,7 +770,6 @@ int main() {
     // Initialize board
     init();
     Rand_NASYC(RAND_Z, RAND_Z_SIZE);
-    // memset(GLOBAL_KEY, 0, AES_SIZE);
     Rand_NASYC(GLOBAL_KEY, AES_SIZE);
     Rand_NASYC(KEY_SHARE, AES_SIZE);
     synthesized = 0;
@@ -786,12 +779,12 @@ int main() {
     print_info("Application Processor Started\n");
 
     // Handle commands forever
-    char buf[100];
+    char buf[128];
     while (1) {
         memset(buf, 0, 100);
         recv_input("Enter Command: ", buf);
 
-        if (!strcmp(buf, "list")) { // TODO: 3
+        if (!strcmp(buf, "list")) {
             scan_components();
             continue;
         } 
@@ -812,27 +805,20 @@ int main() {
                     synthesized = 1;
                 }
                 else{
+                    Rand_NASYC(GLOBAL_KEY, AES_SIZE);
+                    Rand_NASYC(KEY_SHARE, AES_SIZE);
                     print_info("Synthesize the keys failed\n");
                 }
             }
-
-
-            // memset(CP_KEY1, 0, 17);
-            // memset(CP_KEY2, 0, 17);
-            // poll_and_receive_packet(component_id_to_i2c_addr(flash_status.component_ids[0]), CP_KEY1);
-            // poll_and_receive_packet(component_id_to_i2c_addr(flash_status.component_ids[1]), CP_KEY2);
         }
-
-        // Shouldn't the merging happen here?
-        //&& (strlen(buf) != 0
 
         // Execute requested command
         if( synthesized == 1){
-            if (!strcmp(buf, "boot")) { // TODO: 4
+            if (!strcmp(buf, "boot")) {
                 attempt_boot();
-            } else if (!strcmp(buf, "replace")) { // TODO: 5
+            } else if (!strcmp(buf, "replace")) {
                 attempt_replace();
-            } else if (!strcmp(buf, "attest")) { // TODO: 6
+            } else if (!strcmp(buf, "attest")) {
                 attempt_attest();
             } else {
                 print_error("Unrecognized command '%s'\n", buf);

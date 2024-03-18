@@ -186,6 +186,9 @@ void secure_send(uint8_t *buffer, uint8_t len) {
     uint8Arr_to_uint8Arr(RAND_Z, response_ans->rand_z);
     uint8Arr_to_uint8Arr(command->rand_z, RAND_Z);
     uint8Arr_to_uint8Arr(command->rand_y, RAND_Y);
+    if(len > MAX_I2C_MESSAGE_LEN - 21){
+        len = MAX_I2C_MESSAGE_LEN - 21;
+    }
     for (int x = 0; x < len; x++) {
         command->remain[x] = buffer[x];
     }
@@ -332,11 +335,17 @@ void component_process_cmd() {
     else if(operation == 2 && synthesized == 0){
         if(key_sync(GLOBAL_KEY) != -1){
             synthesized = 1;
+            return;
         }
-        return;
+        else{
+            printf("Key sync failed");
+            Rand_NASYC(GLOBAL_KEY, AES_SIZE);
+            Rand_NASYC(KEY_SHARE, AES_SIZE);
+            return;
+        }
     }
     else if(synthesized == 0){
-        printf("Key sync failed");
+        printf("Key sync not completed");
         return;
     }
     message *command = (message *)receive_buffer;

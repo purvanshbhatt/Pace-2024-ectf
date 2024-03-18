@@ -21,8 +21,8 @@ void recv_input(const char *msg, char *buf) {
     fflush(0);
     print_ack();
     fgets(buf, 100, stdin);
+    buf[127] = '\0';
     buf[strcspn(buf, "\n")] = '\0';
-    // if() TODO: need to do something here?
     puts("");
 }
 
