@@ -92,7 +92,7 @@ options:
 
 **Example Utilization**
 ```bash
-ectf_build_depl -d ../ectf-2024-example
+ectf_build_depl -d .
 ```
 ### Building the Application Processor
 This will run the `Makefile` found in the application processor folder using the following inputs:
@@ -125,7 +125,7 @@ options:
 
 **Example Utilization**
 ```bash
-ectf_build_ap -d ../ectf-2024-example -on ap --p 123456 -c 2 -ids "0x11111124, 0x11111125" -b "Test boot message" -t 0123456789abcdef -od build
+ectf_build_ap -d . -on ap --p 123456 -c 2 -ids "0x99887720, 0x99887721" -b "Test boot message" -t 0123456789abcdef -od build
 ```
 
 ### Building the Component
@@ -158,7 +158,7 @@ options:
 
 **Example Utilization**
 ```bash
-ectf_build_comp -d ../ectf-2024-example -on comp -od build -id 0x11111125 -b "Component boot" -al "McLean" -ad "08/08/08" -ac "Fritz"
+ectf_build_comp -d . -on comp -od build -id 0x99887721 -b "Component boot" -al "Pace" -ad "01/01/1001" -ac "University"
 ```
 
 ## Flashing
@@ -177,7 +177,7 @@ optional arguments:
 
 **Example Utilization**
 ```bash
-ectf_update --infile example_fw/build/firmware.img --port /dev/ttyUSB0
+ectf_update --infile example_fw/build/firmware.img --port /dev/ttyACM0
 ```
 
 ## Host Tools
@@ -199,7 +199,7 @@ options:
 
 **Example Utilization**
 ``` bash
-ectf_list -a /dev/ttyUSB0
+ectf_list -a /dev/ttyACM0
 ```
 
 ### Boot Tool
@@ -219,7 +219,7 @@ options:
 
 **Example Utilization**
 ``` bash
-ectf_boot -a /dev/ttyUSB0
+ectf_boot -a /dev/ttyACM0
 ```
 
 ### Replace Tool
@@ -246,7 +246,7 @@ options:
 
 **Example Utilization**
 ``` bash
-ectf_replace -a /dev/ttyUSB0 -t 0123456789abcdef -i 0x11111126 -o 0x11111125
+ectf_replace -a /dev/ttyACM0 -t 0123456789abcdef -i 0x99887720 -o 0x99887721
 ```
 
 ### Attestation Tool
@@ -270,5 +270,5 @@ options:
 
 **Example Utilization**
 ```
-ectf_attestation -a /dev/ttyUSB0 -p 123456 -c 0x11111124
+ectf_attestation -a /dev/ttyACM0 -p 123456 -c 0x99887720
 ```
