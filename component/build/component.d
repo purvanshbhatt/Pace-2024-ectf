@@ -48,23 +48,56 @@
  /Pace-2024-ectf/msdk/Libraries/MiscDrivers/LED/led.h \
  /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/Include/MAX78000/mxc_assert.h \
  /Pace-2024-ectf/msdk/Libraries/MiscDrivers/PushButton/pb.h \
- /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/Include/MAX78000/i2c.h \
- /Pace-2024-ectf/msdk/Libraries/CMSIS/Device/Maxim/MAX78000/Include/i2c_regs.h \
- /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/Include/MAX78000/mxc_delay.h \
- /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/Include/MAX78000/mxc_errors.h \
- /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/Include/MAX78000/nvic_table.h \
- /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/arm-none-eabi/include/string.h \
- /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/arm-none-eabi/include/sys/_locale.h \
- /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/arm-none-eabi/include/strings.h \
- /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/arm-none-eabi/include/sys/string.h \
- inc/simple_i2c_peripheral.h \
+ inc/board_link.h inc/simple_i2c_peripheral.h \
  /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/Source/I2C/i2c_reva_regs.h \
  /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/Source/I2C/i2c_reva.h \
  /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/Include/MAX78000/mxc_device.h \
  /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/Include/MAX78000/mxc_lock.h \
  /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/Include/MAX78000/mxc_sys.h \
+ /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/Include/MAX78000/mxc_delay.h \
+ /Pace-2024-ectf/msdk/Libraries/CMSIS/Device/Maxim/MAX78000/Include/i2c_regs.h \
  /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/Source/I2C/i2c_reva_regs.h \
  /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/Include/MAX78000/dma.h \
  /Pace-2024-ectf/msdk/Libraries/CMSIS/Device/Maxim/MAX78000/Include/dma_regs.h \
- inc/board_link.h inc/simple_i2c_peripheral.h inc/ectf_params.h \
- ../deployment/global_secrets.h
+ /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/Include/MAX78000/mxc_errors.h \
+ /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/Include/MAX78000/nvic_table.h \
+ /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/Include/MAX78000/i2c.h \
+ inc/simple_crypto.h wolfssl/wolfssl/wolfcrypt/aes.h \
+ wolfssl/wolfssl/wolfcrypt/types.h wolfssl/wolfssl/wolfcrypt/settings.h \
+ wolfssl/wolfssl/wolfcrypt/visibility.h \
+ wolfssl/wolfssl/wolfcrypt/wc_port.h \
+ /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/arm-none-eabi/include/pthread.h \
+ /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/arm-none-eabi/include/unistd.h \
+ /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/arm-none-eabi/include/sys/unistd.h \
+ /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/arm-none-eabi/include/sys/types.h \
+ /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/arm-none-eabi/include/machine/endian.h \
+ /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/arm-none-eabi/include/machine/_endian.h \
+ /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/arm-none-eabi/include/sys/select.h \
+ /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/arm-none-eabi/include/sys/_sigset.h \
+ /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/arm-none-eabi/include/sys/_timeval.h \
+ /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/arm-none-eabi/include/sys/timespec.h \
+ /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/arm-none-eabi/include/sys/_timespec.h \
+ /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/arm-none-eabi/include/sys/_pthreadtypes.h \
+ /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/arm-none-eabi/include/sys/sched.h \
+ /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/arm-none-eabi/include/machine/types.h \
+ /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/arm-none-eabi/include/time.h \
+ /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/arm-none-eabi/include/machine/time.h \
+ /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/arm-none-eabi/include/sys/_locale.h \
+ wolfssl/wolfssl/wolfcrypt/memory.h \
+ /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/arm-none-eabi/include/stdlib.h \
+ /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/arm-none-eabi/include/machine/stdlib.h \
+ /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/arm-none-eabi/include/alloca.h \
+ /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/arm-none-eabi/include/string.h \
+ /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/arm-none-eabi/include/strings.h \
+ /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/arm-none-eabi/include/sys/string.h \
+ /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/arm-none-eabi/include/ctype.h \
+ wolfssl/wolfssl/wolfcrypt/random.h wolfssl/wolfssl/wolfcrypt/sha256.h \
+ wolfssl/wolfssl/wolfcrypt/hash.h wolfssl/wolfssl/wolfcrypt/md5.h \
+ wolfssl/wolfssl/wolfcrypt/sha.h wolfssl/wolfssl/wolfcrypt/md4.h \
+ inc/simple_i2c_peripheral.h inc/ectf_params.h inc/Rand_lib.h \
+ /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/Include/MAX78000/trng.h \
+ /Pace-2024-ectf/msdk/Libraries/CMSIS/Device/Maxim/MAX78000/Include/trng_regs.h \
+ inc/disable_cache.h \
+ /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/Include/MAX78000/icc.h \
+ /Pace-2024-ectf/msdk/Libraries/CMSIS/Device/Maxim/MAX78000/Include/icc_regs.h \
+ inc/key_exchange.h inc/key.h
