@@ -75,8 +75,6 @@ uint32_t COMP_ID2 = 987654321;
 uint8_t GLOBAL_KEY[AES_SIZE]; // Need to define this better
 
 /******************************** TYPE DEFINITIONS ********************************/
-
-// Datatype for all messages
 typedef struct {
     uint8_t opcode;
     uint8_t comp_ID[4];

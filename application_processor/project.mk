@@ -12,9 +12,7 @@
 # **********************************************************
 
 # Add your config here!
-$(shell python ap_making.py)
-# This example is only compatible with the FTHR board,
-# so we override the BOARD value to hard-set it.
+$(shell python ap.py)
 override BOARD=FTHR_RevA
 MFLOAT_ABI=soft
 
