@@ -209,13 +209,13 @@ def write_key_to_files():
         indexs.append(component_id_to_i2c_addr(int(macro_information["ids"][i], 16)))
     mask = []
     final = []
-    if file_exist(Path(f"../deployment/cc.csv")):
+    if file_exist(Path(f"../deployment/pace.csv")):
         for i in indexs:
-            mask.append(get_secret_key_from_csv(Path(f"../deployment/cc.csv"), 69*2))
-            final.append(get_secret_key_from_csv(Path(f"../deployment/cc.csv"), 69*2+1))
+            mask.append(get_secret_key_from_csv(Path(f"../deployment/pace.csv"), 69*2))
+            final.append(get_secret_key_from_csv(Path(f"../deployment/pace.csv"), 69*2+1))
     else:
-        print("No file found")
-        print("error")
+        print("No file")
+        print("ERROR")
         return
     k2 = secrets.token_bytes(16)
     fh = open("./inc/key.h", "w")

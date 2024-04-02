@@ -14634,7 +14634,7 @@ LOAD /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/
  *(.rom_vector)
  *(.rom_handlers*)
 
-.text           0x1000e000     0xfdf4
+.text           0x1000e000     0xfe44
                 0x1000e000                        _text = .
  *(.isr_vector)
  .isr_vector    0x1000e000      0x1e0 /Pace-2024-ectf/component/build/startup_firmware.o
@@ -14680,967 +14680,968 @@ LOAD /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/
  .text.boot     0x1000e418       0x64 /Pace-2024-ectf/component/build/component.o
                 0x1000e418                boot
  .text.process_boot
-                0x1000e47c       0x94 /Pace-2024-ectf/component/build/component.o
+                0x1000e47c       0xa8 /Pace-2024-ectf/component/build/component.o
                 0x1000e47c                process_boot
  .text.process_scan
-                0x1000e510       0x48 /Pace-2024-ectf/component/build/component.o
-                0x1000e510                process_scan
+                0x1000e524       0x48 /Pace-2024-ectf/component/build/component.o
+                0x1000e524                process_scan
  .text.process_attest
-                0x1000e558       0xc0 /Pace-2024-ectf/component/build/component.o
-                0x1000e558                process_attest
+                0x1000e56c       0xc0 /Pace-2024-ectf/component/build/component.o
+                0x1000e56c                process_attest
  .text.component_process_cmd
-                0x1000e618       0x80 /Pace-2024-ectf/component/build/component.o
-                0x1000e618                component_process_cmd
+                0x1000e62c       0x80 /Pace-2024-ectf/component/build/component.o
+                0x1000e62c                component_process_cmd
  .text.startup.main
-                0x1000e698       0x54 /Pace-2024-ectf/component/build/component.o
-                0x1000e698                main
- .text.sync2    0x1000e6ec       0x68 /Pace-2024-ectf/component/build/key_exchange.o
-                0x1000e6ec                sync2
- .text.sync1    0x1000e754       0x44 /Pace-2024-ectf/component/build/key_exchange.o
-                0x1000e754                sync1
+                0x1000e6ac       0x54 /Pace-2024-ectf/component/build/component.o
+                0x1000e6ac                main
+ .text.sync2    0x1000e700       0x68 /Pace-2024-ectf/component/build/key_exchange.o
+                0x1000e700                sync2
+ .text.sync1    0x1000e768       0x44 /Pace-2024-ectf/component/build/key_exchange.o
+                0x1000e768                sync1
  .text.key_sync
-                0x1000e798       0x40 /Pace-2024-ectf/component/build/key_exchange.o
-                0x1000e798                key_sync
+                0x1000e7ac       0x40 /Pace-2024-ectf/component/build/key_exchange.o
+                0x1000e7ac                key_sync
  .text.encrypt_sym
-                0x1000e7d8       0x54 /Pace-2024-ectf/component/build/simple_crypto.o
-                0x1000e7d8                encrypt_sym
+                0x1000e7ec       0x54 /Pace-2024-ectf/component/build/simple_crypto.o
+                0x1000e7ec                encrypt_sym
  .text.decrypt_sym
-                0x1000e82c       0x58 /Pace-2024-ectf/component/build/simple_crypto.o
-                0x1000e82c                decrypt_sym
+                0x1000e840       0x58 /Pace-2024-ectf/component/build/simple_crypto.o
+                0x1000e840                decrypt_sym
  .text.i2c_simple_isr
-                0x1000e884      0x260 /Pace-2024-ectf/component/build/simple_i2c_peripheral.o
+                0x1000e898      0x260 /Pace-2024-ectf/component/build/simple_i2c_peripheral.o
  .text.i2c_simple_peripheral_init
-                0x1000eae4       0x8c /Pace-2024-ectf/component/build/simple_i2c_peripheral.o
-                0x1000eae4                i2c_simple_peripheral_init
+                0x1000eaf8       0x8c /Pace-2024-ectf/component/build/simple_i2c_peripheral.o
+                0x1000eaf8                i2c_simple_peripheral_init
  .text.XOR_secure
-                0x1000eb70       0x28 /Pace-2024-ectf/component/build/xor_secure.o
-                0x1000eb70                XOR_secure
+                0x1000eb84       0x28 /Pace-2024-ectf/component/build/xor_secure.o
+                0x1000eb84                XOR_secure
  .text.AesEncrypt_C
-                0x1000eb98      0xdd0 /Pace-2024-ectf/component/build/aes.o
+                0x1000ebac      0xdd0 /Pace-2024-ectf/component/build/aes.o
  .text.AesDecrypt_C
-                0x1000f968      0xd70 /Pace-2024-ectf/component/build/aes.o
+                0x1000f97c      0xd70 /Pace-2024-ectf/component/build/aes.o
  .text.wc_AesSetKeyLocal.constprop.0
-                0x100106d8      0x50c /Pace-2024-ectf/component/build/aes.o
+                0x100106ec      0x50c /Pace-2024-ectf/component/build/aes.o
  .text.wc_AesSetKey
-                0x10010be4       0x20 /Pace-2024-ectf/component/build/aes.o
-                0x10010be4                wc_AesSetKey
+                0x10010bf8       0x20 /Pace-2024-ectf/component/build/aes.o
+                0x10010bf8                wc_AesSetKey
  .text.wc_AesEncryptDirect
-                0x10010c04       0x30 /Pace-2024-ectf/component/build/aes.o
-                0x10010c04                wc_AesEncryptDirect
+                0x10010c18       0x30 /Pace-2024-ectf/component/build/aes.o
+                0x10010c18                wc_AesEncryptDirect
  .text.wc_AesDecryptDirect
-                0x10010c34       0x30 /Pace-2024-ectf/component/build/aes.o
-                0x10010c34                wc_AesDecryptDirect
+                0x10010c48       0x30 /Pace-2024-ectf/component/build/aes.o
+                0x10010c48                wc_AesDecryptDirect
  .text.mxc_assert
-                0x10010c64       0x10 /Pace-2024-ectf/component/build/board.o
-                0x10010c64                mxc_assert
+                0x10010c78       0x10 /Pace-2024-ectf/component/build/board.o
+                0x10010c78                mxc_assert
  .text.GPIO0_IRQHandler
-                0x10010c74        0x8 /Pace-2024-ectf/component/build/board.o
-                0x10010c74                GPIO0_IRQHandler
+                0x10010c88        0x8 /Pace-2024-ectf/component/build/board.o
+                0x10010c88                GPIO0_IRQHandler
  .text.GPIO1_IRQHandler
-                0x10010c7c        0x8 /Pace-2024-ectf/component/build/board.o
-                0x10010c7c                GPIO1_IRQHandler
+                0x10010c90        0x8 /Pace-2024-ectf/component/build/board.o
+                0x10010c90                GPIO1_IRQHandler
  .text.Board_Init
-                0x10010c84       0x6c /Pace-2024-ectf/component/build/board.o
-                0x10010c84                Board_Init
+                0x10010c98       0x6c /Pace-2024-ectf/component/build/board.o
+                0x10010c98                Board_Init
  .text.NMI_Handler
-                0x10010cf0        0x4 /Pace-2024-ectf/component/build/board.o
-                0x10010cf0                NMI_Handler
- .text._close   0x10010cf4        0x8 /Pace-2024-ectf/component/build/stdio.o
-                0x10010cf4                _close
- .text._isatty  0x10010cfc        0x8 /Pace-2024-ectf/component/build/stdio.o
-                0x10010cfc                _isatty
- .text._lseek   0x10010d04        0x8 /Pace-2024-ectf/component/build/stdio.o
-                0x10010d04                _lseek
- .text._fstat   0x10010d0c        0x8 /Pace-2024-ectf/component/build/stdio.o
-                0x10010d0c                _fstat
- .text._read    0x10010d14       0x50 /Pace-2024-ectf/component/build/stdio.o
-                0x10010d14                _read
- .text._write   0x10010d64       0x60 /Pace-2024-ectf/component/build/stdio.o
-                0x10010d64                _write
+                0x10010d04        0x4 /Pace-2024-ectf/component/build/board.o
+                0x10010d04                NMI_Handler
+ .text._close   0x10010d08        0x8 /Pace-2024-ectf/component/build/stdio.o
+                0x10010d08                _close
+ .text._isatty  0x10010d10        0x8 /Pace-2024-ectf/component/build/stdio.o
+                0x10010d10                _isatty
+ .text._lseek   0x10010d18        0x8 /Pace-2024-ectf/component/build/stdio.o
+                0x10010d18                _lseek
+ .text._fstat   0x10010d20        0x8 /Pace-2024-ectf/component/build/stdio.o
+                0x10010d20                _fstat
+ .text._read    0x10010d28       0x50 /Pace-2024-ectf/component/build/stdio.o
+                0x10010d28                _read
+ .text._write   0x10010d78       0x60 /Pace-2024-ectf/component/build/stdio.o
+                0x10010d78                _write
  .text.LED_Init
-                0x10010dc4       0x40 /Pace-2024-ectf/component/build/led.o
-                0x10010dc4                LED_Init
- .text.LED_On   0x10010e04       0x40 /Pace-2024-ectf/component/build/led.o
-                0x10010e04                LED_On
- .text.LED_Off  0x10010e44       0x40 /Pace-2024-ectf/component/build/led.o
-                0x10010e44                LED_Off
- .text.PB_Init  0x10010e84       0x38 /Pace-2024-ectf/component/build/pb.o
-                0x10010e84                PB_Init
- .text          0x10010ebc      0x148 /Pace-2024-ectf/component/build/startup_firmware.o
-                0x10010ebc                Reset_Handler
-                0x10010efa                HardFault_Handler
-                0x10010efc                MemManage_Handler
-                0x10010efe                BusFault_Handler
-                0x10010f00                UsageFault_Handler
-                0x10010f02                SVC_Handler
-                0x10010f04                DebugMon_Handler
-                0x10010f06                PendSV_Handler
-                0x10010f08                SysTick_Handler
-                0x10010f0a                Default_Handler
-                0x10010f0c                PF_IRQHandler
-                0x10010f0e                WDT0_IRQHandler
-                0x10010f10                RSV02_IRQHandler
-                0x10010f12                RTC_IRQHandler
-                0x10010f16                TMR0_IRQHandler
-                0x10010f18                TMR1_IRQHandler
-                0x10010f1a                TMR2_IRQHandler
-                0x10010f1c                TMR3_IRQHandler
-                0x10010f1e                TMR4_IRQHandler
-                0x10010f20                TMR5_IRQHandler
-                0x10010f22                RSV11_IRQHandler
-                0x10010f24                RSV12_IRQHandler
-                0x10010f26                I2C0_IRQHandler
-                0x10010f28                UART0_IRQHandler
-                0x10010f2a                UART1_IRQHandler
-                0x10010f2c                SPI1_IRQHandler
-                0x10010f2e                RSV17_IRQHandler
-                0x10010f30                RSV18_IRQHandler
-                0x10010f32                RSV19_IRQHandler
-                0x10010f34                ADC_IRQHandler
-                0x10010f36                RSV21_IRQHandler
-                0x10010f38                RSV22_IRQHandler
-                0x10010f3a                FLC0_IRQHandler
-                0x10010f40                GPIO2_IRQHandler
-                0x10010f42                RSV27_IRQHandler
-                0x10010f44                DMA0_IRQHandler
-                0x10010f46                DMA1_IRQHandler
-                0x10010f48                DMA2_IRQHandler
-                0x10010f4a                DMA3_IRQHandler
-                0x10010f4c                RSV32_IRQHandler
-                0x10010f4e                RSV33_IRQHandler
-                0x10010f50                UART2_IRQHandler
-                0x10010f52                RSV35_IRQHandler
-                0x10010f54                I2C1_IRQHandler
-                0x10010f56                RSV37_IRQHandler
-                0x10010f58                RSV38_IRQHandler
-                0x10010f5a                RSV39_IRQHandler
-                0x10010f5c                RSV40_IRQHandler
-                0x10010f5e                RSV41_IRQHandler
-                0x10010f60                RSV42_IRQHandler
-                0x10010f62                RSV43_IRQHandler
-                0x10010f64                RSV44_IRQHandler
-                0x10010f66                RSV45_IRQHandler
-                0x10010f68                RSV46_IRQHandler
-                0x10010f6a                RSV47_IRQHandler
-                0x10010f6c                RSV48_IRQHandler
-                0x10010f6e                RSV49_IRQHandler
-                0x10010f70                RSV50_IRQHandler
-                0x10010f72                RSV51_IRQHandler
-                0x10010f74                RSV52_IRQHandler
-                0x10010f76                WUT_IRQHandler
-                0x10010f78                GPIOWAKE_IRQHandler
-                0x10010f7a                RSV55_IRQHandler
-                0x10010f7c                SPI0_IRQHandler
-                0x10010f7e                WDT1_IRQHandler
-                0x10010f80                RSV58_IRQHandler
-                0x10010f82                PT_IRQHandler
-                0x10010f84                RSV60_IRQHandler
-                0x10010f86                RSV61_IRQHandler
-                0x10010f88                I2C2_IRQHandler
-                0x10010f8a                RISCV_IRQHandler
-                0x10010f8c                RSV64_IRQHandler
-                0x10010f8e                RSV65_IRQHandler
-                0x10010f90                RSV66_IRQHandler
-                0x10010f92                OWM_IRQHandler
-                0x10010f94                RSV68_IRQHandler
-                0x10010f96                RSV69_IRQHandler
-                0x10010f98                RSV70_IRQHandler
-                0x10010f9a                RSV71_IRQHandler
-                0x10010f9c                RSV72_IRQHandler
-                0x10010f9e                RSV73_IRQHandler
-                0x10010fa0                RSV74_IRQHandler
-                0x10010fa2                RSV75_IRQHandler
-                0x10010fa4                RSV76_IRQHandler
-                0x10010fa6                RSV77_IRQHandler
-                0x10010fa8                RSV78_IRQHandler
-                0x10010faa                RSV79_IRQHandler
-                0x10010fac                RSV80_IRQHandler
-                0x10010fae                RSV81_IRQHandler
-                0x10010fb0                ECC_IRQHandler
-                0x10010fb2                DVS_IRQHandler
-                0x10010fb4                SIMO_IRQHandler
-                0x10010fb6                RSV85_IRQHandler
-                0x10010fb8                RSV86_IRQHandler
-                0x10010fba                RSV87_IRQHandler
-                0x10010fbc                UART3_IRQHandler
-                0x10010fbe                RSV89_IRQHandler
-                0x10010fc0                RSV90_IRQHandler
-                0x10010fc2                PCIF_IRQHandler
-                0x10010fc4                RSV92_IRQHandler
-                0x10010fc6                RSV93_IRQHandler
-                0x10010fc8                RSV94_IRQHandler
-                0x10010fca                RSV95_IRQHandler
-                0x10010fcc                RSV96_IRQHandler
-                0x10010fce                AES_IRQHandler
-                0x10010fd0                RSV98_IRQHandler
-                0x10010fd2                I2S_IRQHandler
-                0x10010fd4                CNN_FIFO_IRQHandler
-                0x10010fd6                CNN_IRQHandler
-                0x10010fd8                RSV102_IRQHandler
-                0x10010fda                LPCMP_IRQHandler
- .text._sbrk    0x10011004       0x3c /Pace-2024-ectf/component/build/heap.o
-                0x10011004                _sbrk
+                0x10010dd8       0x40 /Pace-2024-ectf/component/build/led.o
+                0x10010dd8                LED_Init
+ .text.LED_On   0x10010e18       0x40 /Pace-2024-ectf/component/build/led.o
+                0x10010e18                LED_On
+ .text.LED_Off  0x10010e58       0x40 /Pace-2024-ectf/component/build/led.o
+                0x10010e58                LED_Off
+ .text.PB_Init  0x10010e98       0x38 /Pace-2024-ectf/component/build/pb.o
+                0x10010e98                PB_Init
+ .text          0x10010ed0      0x148 /Pace-2024-ectf/component/build/startup_firmware.o
+                0x10010ed0                Reset_Handler
+                0x10010f0e                HardFault_Handler
+                0x10010f10                MemManage_Handler
+                0x10010f12                BusFault_Handler
+                0x10010f14                UsageFault_Handler
+                0x10010f16                SVC_Handler
+                0x10010f18                DebugMon_Handler
+                0x10010f1a                PendSV_Handler
+                0x10010f1c                SysTick_Handler
+                0x10010f1e                Default_Handler
+                0x10010f20                PF_IRQHandler
+                0x10010f22                WDT0_IRQHandler
+                0x10010f24                RSV02_IRQHandler
+                0x10010f26                RTC_IRQHandler
+                0x10010f2a                TMR0_IRQHandler
+                0x10010f2c                TMR1_IRQHandler
+                0x10010f2e                TMR2_IRQHandler
+                0x10010f30                TMR3_IRQHandler
+                0x10010f32                TMR4_IRQHandler
+                0x10010f34                TMR5_IRQHandler
+                0x10010f36                RSV11_IRQHandler
+                0x10010f38                RSV12_IRQHandler
+                0x10010f3a                I2C0_IRQHandler
+                0x10010f3c                UART0_IRQHandler
+                0x10010f3e                UART1_IRQHandler
+                0x10010f40                SPI1_IRQHandler
+                0x10010f42                RSV17_IRQHandler
+                0x10010f44                RSV18_IRQHandler
+                0x10010f46                RSV19_IRQHandler
+                0x10010f48                ADC_IRQHandler
+                0x10010f4a                RSV21_IRQHandler
+                0x10010f4c                RSV22_IRQHandler
+                0x10010f4e                FLC0_IRQHandler
+                0x10010f54                GPIO2_IRQHandler
+                0x10010f56                RSV27_IRQHandler
+                0x10010f58                DMA0_IRQHandler
+                0x10010f5a                DMA1_IRQHandler
+                0x10010f5c                DMA2_IRQHandler
+                0x10010f5e                DMA3_IRQHandler
+                0x10010f60                RSV32_IRQHandler
+                0x10010f62                RSV33_IRQHandler
+                0x10010f64                UART2_IRQHandler
+                0x10010f66                RSV35_IRQHandler
+                0x10010f68                I2C1_IRQHandler
+                0x10010f6a                RSV37_IRQHandler
+                0x10010f6c                RSV38_IRQHandler
+                0x10010f6e                RSV39_IRQHandler
+                0x10010f70                RSV40_IRQHandler
+                0x10010f72                RSV41_IRQHandler
+                0x10010f74                RSV42_IRQHandler
+                0x10010f76                RSV43_IRQHandler
+                0x10010f78                RSV44_IRQHandler
+                0x10010f7a                RSV45_IRQHandler
+                0x10010f7c                RSV46_IRQHandler
+                0x10010f7e                RSV47_IRQHandler
+                0x10010f80                RSV48_IRQHandler
+                0x10010f82                RSV49_IRQHandler
+                0x10010f84                RSV50_IRQHandler
+                0x10010f86                RSV51_IRQHandler
+                0x10010f88                RSV52_IRQHandler
+                0x10010f8a                WUT_IRQHandler
+                0x10010f8c                GPIOWAKE_IRQHandler
+                0x10010f8e                RSV55_IRQHandler
+                0x10010f90                SPI0_IRQHandler
+                0x10010f92                WDT1_IRQHandler
+                0x10010f94                RSV58_IRQHandler
+                0x10010f96                PT_IRQHandler
+                0x10010f98                RSV60_IRQHandler
+                0x10010f9a                RSV61_IRQHandler
+                0x10010f9c                I2C2_IRQHandler
+                0x10010f9e                RISCV_IRQHandler
+                0x10010fa0                RSV64_IRQHandler
+                0x10010fa2                RSV65_IRQHandler
+                0x10010fa4                RSV66_IRQHandler
+                0x10010fa6                OWM_IRQHandler
+                0x10010fa8                RSV68_IRQHandler
+                0x10010faa                RSV69_IRQHandler
+                0x10010fac                RSV70_IRQHandler
+                0x10010fae                RSV71_IRQHandler
+                0x10010fb0                RSV72_IRQHandler
+                0x10010fb2                RSV73_IRQHandler
+                0x10010fb4                RSV74_IRQHandler
+                0x10010fb6                RSV75_IRQHandler
+                0x10010fb8                RSV76_IRQHandler
+                0x10010fba                RSV77_IRQHandler
+                0x10010fbc                RSV78_IRQHandler
+                0x10010fbe                RSV79_IRQHandler
+                0x10010fc0                RSV80_IRQHandler
+                0x10010fc2                RSV81_IRQHandler
+                0x10010fc4                ECC_IRQHandler
+                0x10010fc6                DVS_IRQHandler
+                0x10010fc8                SIMO_IRQHandler
+                0x10010fca                RSV85_IRQHandler
+                0x10010fcc                RSV86_IRQHandler
+                0x10010fce                RSV87_IRQHandler
+                0x10010fd0                UART3_IRQHandler
+                0x10010fd2                RSV89_IRQHandler
+                0x10010fd4                RSV90_IRQHandler
+                0x10010fd6                PCIF_IRQHandler
+                0x10010fd8                RSV92_IRQHandler
+                0x10010fda                RSV93_IRQHandler
+                0x10010fdc                RSV94_IRQHandler
+                0x10010fde                RSV95_IRQHandler
+                0x10010fe0                RSV96_IRQHandler
+                0x10010fe2                AES_IRQHandler
+                0x10010fe4                RSV98_IRQHandler
+                0x10010fe6                I2S_IRQHandler
+                0x10010fe8                CNN_FIFO_IRQHandler
+                0x10010fea                CNN_IRQHandler
+                0x10010fec                RSV102_IRQHandler
+                0x10010fee                LPCMP_IRQHandler
+ .text._sbrk    0x10011018       0x3c /Pace-2024-ectf/component/build/heap.o
+                0x10011018                _sbrk
  .text.SystemCoreClockUpdate
-                0x10011040       0x68 /Pace-2024-ectf/component/build/system_max78000.o
-                0x10011040                SystemCoreClockUpdate
- .text.PreInit  0x100110a8        0x4 /Pace-2024-ectf/component/build/system_max78000.o
-                0x100110a8                PreInit
+                0x10011054       0x68 /Pace-2024-ectf/component/build/system_max78000.o
+                0x10011054                SystemCoreClockUpdate
+ .text.PreInit  0x100110bc        0x4 /Pace-2024-ectf/component/build/system_max78000.o
+                0x100110bc                PreInit
  .text.SystemInit
-                0x100110ac       0x38 /Pace-2024-ectf/component/build/system_max78000.o
-                0x100110ac                SystemInit
+                0x100110c0       0x38 /Pace-2024-ectf/component/build/system_max78000.o
+                0x100110c0                SystemInit
  .text.MXC_DelayInit
-                0x100110e4       0x7c /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(mxc_delay.o)
+                0x100110f8       0x7c /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(mxc_delay.o)
  .text.MXC_DelayAsync
-                0x10011160       0x3c /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(mxc_delay.o)
-                0x10011160                MXC_DelayAsync
+                0x10011174       0x3c /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(mxc_delay.o)
+                0x10011174                MXC_DelayAsync
  .text.MXC_DelayCheck
-                0x1001119c       0x70 /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(mxc_delay.o)
-                0x1001119c                MXC_DelayCheck
+                0x100111b0       0x70 /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(mxc_delay.o)
+                0x100111b0                MXC_DelayCheck
  .text.MXC_DelayAbort
-                0x1001120c       0x34 /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(mxc_delay.o)
-                0x1001120c                MXC_DelayAbort
+                0x10011220       0x34 /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(mxc_delay.o)
+                0x10011220                MXC_DelayAbort
  .text.MXC_Delay
-                0x10011240       0x74 /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(mxc_delay.o)
-                0x10011240                MXC_Delay
+                0x10011254       0x74 /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(mxc_delay.o)
+                0x10011254                MXC_Delay
  .text.MXC_NVIC_SetVector
-                0x100112b4       0x50 /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(nvic_table.o)
-                0x100112b4                MXC_NVIC_SetVector
+                0x100112c8       0x50 /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(nvic_table.o)
+                0x100112c8                MXC_NVIC_SetVector
  .text.MXC_SYS_ClockDisable
-                0x10011304       0x40 /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(sys_ai85.o)
-                0x10011304                MXC_SYS_ClockDisable
+                0x10011318       0x40 /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(sys_ai85.o)
+                0x10011318                MXC_SYS_ClockDisable
  .text.MXC_SYS_ClockEnable
-                0x10011344       0x44 /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(sys_ai85.o)
-                0x10011344                MXC_SYS_ClockEnable
+                0x10011358       0x44 /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(sys_ai85.o)
+                0x10011358                MXC_SYS_ClockEnable
  .text.MXC_SYS_ClockSourceEnable
-                0x10011388       0xf4 /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(sys_ai85.o)
-                0x10011388                MXC_SYS_ClockSourceEnable
+                0x1001139c       0xf4 /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(sys_ai85.o)
+                0x1001139c                MXC_SYS_ClockSourceEnable
  .text.MXC_SYS_Reset_Periph
-                0x1001147c       0x48 /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(sys_ai85.o)
-                0x1001147c                MXC_SYS_Reset_Periph
+                0x10011490       0x48 /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(sys_ai85.o)
+                0x10011490                MXC_SYS_Reset_Periph
  .text.MXC_GPIO_Init
-                0x100114c4       0x40 /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(gpio_ai85.o)
-                0x100114c4                MXC_GPIO_Init
+                0x100114d8       0x40 /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(gpio_ai85.o)
+                0x100114d8                MXC_GPIO_Init
  .text.MXC_GPIO_Config
-                0x10011504      0x20c /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(gpio_ai85.o)
-                0x10011504                MXC_GPIO_Config
+                0x10011518      0x20c /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(gpio_ai85.o)
+                0x10011518                MXC_GPIO_Config
  .text.MXC_GPIO_OutSet
-                0x10011710       0x2c /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(gpio_ai85.o)
-                0x10011710                MXC_GPIO_OutSet
+                0x10011724       0x2c /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(gpio_ai85.o)
+                0x10011724                MXC_GPIO_OutSet
  .text.MXC_GPIO_OutClr
-                0x1001173c       0x30 /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(gpio_ai85.o)
-                0x1001173c                MXC_GPIO_OutClr
+                0x10011750       0x30 /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(gpio_ai85.o)
+                0x10011750                MXC_GPIO_OutClr
  .text.MXC_GPIO_Handler
-                0x1001176c        0x4 /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(gpio_ai85.o)
-                0x1001176c                MXC_GPIO_Handler
+                0x10011780        0x4 /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(gpio_ai85.o)
+                0x10011780                MXC_GPIO_Handler
  .text.MXC_GPIO_ClearFlags
-                0x10011770       0x18 /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(gpio_ai85.o)
-                0x10011770                MXC_GPIO_ClearFlags
+                0x10011784       0x18 /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(gpio_ai85.o)
+                0x10011784                MXC_GPIO_ClearFlags
  .text.MXC_GPIO_GetFlags
-                0x10011788       0x18 /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(gpio_ai85.o)
-                0x10011788                MXC_GPIO_GetFlags
+                0x1001179c       0x18 /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(gpio_ai85.o)
+                0x1001179c                MXC_GPIO_GetFlags
  .text.MXC_GPIO_RevA_OutSet
-                0x100117a0        0x4 /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(gpio_reva.o)
-                0x100117a0                MXC_GPIO_RevA_OutSet
+                0x100117b4        0x4 /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(gpio_reva.o)
+                0x100117b4                MXC_GPIO_RevA_OutSet
  .text.MXC_GPIO_RevA_OutClr
-                0x100117a4        0x4 /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(gpio_reva.o)
-                0x100117a4                MXC_GPIO_RevA_OutClr
+                0x100117b8        0x4 /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(gpio_reva.o)
+                0x100117b8                MXC_GPIO_RevA_OutClr
  .text.MXC_GPIO_RevA_ClearFlags
-                0x100117a8        0x4 /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(gpio_reva.o)
-                0x100117a8                MXC_GPIO_RevA_ClearFlags
+                0x100117bc        0x4 /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(gpio_reva.o)
+                0x100117bc                MXC_GPIO_RevA_ClearFlags
  .text.MXC_GPIO_RevA_GetFlags
-                0x100117ac        0x4 /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(gpio_reva.o)
-                0x100117ac                MXC_GPIO_RevA_GetFlags
+                0x100117c0        0x4 /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(gpio_reva.o)
+                0x100117c0                MXC_GPIO_RevA_GetFlags
  .text.MXC_GPIO_RevA_SetVSSEL
-                0x100117b0       0x2c /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(gpio_reva.o)
-                0x100117b0                MXC_GPIO_RevA_SetVSSEL
+                0x100117c4       0x2c /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(gpio_reva.o)
+                0x100117c4                MXC_GPIO_RevA_SetVSSEL
  .text.MXC_GPIO_RevA_SetAF
-                0x100117dc       0x6c /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(gpio_reva.o)
-                0x100117dc                MXC_GPIO_RevA_SetAF
+                0x100117f0       0x6c /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(gpio_reva.o)
+                0x100117f0                MXC_GPIO_RevA_SetAF
  .text.MXC_I2C_SetSlaveAddr
-                0x10011848        0x4 /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(i2c_me17.o)
-                0x10011848                MXC_I2C_SetSlaveAddr
+                0x1001185c        0x4 /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(i2c_me17.o)
+                0x1001185c                MXC_I2C_SetSlaveAddr
  .text.MXC_I2C_Shutdown
-                0x1001184c       0x54 /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(i2c_me17.o)
-                0x1001184c                MXC_I2C_Shutdown
+                0x10011860       0x54 /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(i2c_me17.o)
+                0x10011860                MXC_I2C_Shutdown
  .text.MXC_I2C_Init
-                0x100118a0       0x94 /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(i2c_me17.o)
-                0x100118a0                MXC_I2C_Init
+                0x100118b4       0x94 /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(i2c_me17.o)
+                0x100118b4                MXC_I2C_Init
  .text.MXC_I2C_SetFrequency
-                0x10011934        0x4 /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(i2c_me17.o)
-                0x10011934                MXC_I2C_SetFrequency
- .text.MXC_I2C_GetFrequency
-                0x10011938        0x4 /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(i2c_me17.o)
-                0x10011938                MXC_I2C_GetFrequency
- .text.MXC_I2C_ReadRXFIFO
-                0x1001193c        0x4 /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(i2c_me17.o)
-                0x1001193c                MXC_I2C_ReadRXFIFO
- .text.MXC_I2C_GetRXFIFOAvailable
-                0x10011940        0x4 /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(i2c_me17.o)
-                0x10011940                MXC_I2C_GetRXFIFOAvailable
- .text.MXC_I2C_WriteTXFIFO
-                0x10011944        0x4 /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(i2c_me17.o)
-                0x10011944                MXC_I2C_WriteTXFIFO
- .text.MXC_I2C_GetTXFIFOAvailable
                 0x10011948        0x4 /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(i2c_me17.o)
-                0x10011948                MXC_I2C_GetTXFIFOAvailable
- .text.MXC_I2C_ClearRXFIFO
+                0x10011948                MXC_I2C_SetFrequency
+ .text.MXC_I2C_GetFrequency
                 0x1001194c        0x4 /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(i2c_me17.o)
-                0x1001194c                MXC_I2C_ClearRXFIFO
- .text.MXC_I2C_ClearTXFIFO
+                0x1001194c                MXC_I2C_GetFrequency
+ .text.MXC_I2C_ReadRXFIFO
                 0x10011950        0x4 /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(i2c_me17.o)
-                0x10011950                MXC_I2C_ClearTXFIFO
- .text.MXC_I2C_ClearFlags
+                0x10011950                MXC_I2C_ReadRXFIFO
+ .text.MXC_I2C_GetRXFIFOAvailable
                 0x10011954        0x4 /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(i2c_me17.o)
-                0x10011954                MXC_I2C_ClearFlags
- .text.MXC_I2C_EnableInt
+                0x10011954                MXC_I2C_GetRXFIFOAvailable
+ .text.MXC_I2C_WriteTXFIFO
                 0x10011958        0x4 /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(i2c_me17.o)
-                0x10011958                MXC_I2C_EnableInt
- .text.MXC_I2C_DisableInt
+                0x10011958                MXC_I2C_WriteTXFIFO
+ .text.MXC_I2C_GetTXFIFOAvailable
                 0x1001195c        0x4 /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(i2c_me17.o)
-                0x1001195c                MXC_I2C_DisableInt
- .text.MXC_I2C_Recover
+                0x1001195c                MXC_I2C_GetTXFIFOAvailable
+ .text.MXC_I2C_ClearRXFIFO
                 0x10011960        0x4 /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(i2c_me17.o)
-                0x10011960                MXC_I2C_Recover
- .text.MXC_I2C_SetRXThreshold
+                0x10011960                MXC_I2C_ClearRXFIFO
+ .text.MXC_I2C_ClearTXFIFO
                 0x10011964        0x4 /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(i2c_me17.o)
-                0x10011964                MXC_I2C_SetRXThreshold
- .text.MXC_I2C_SetTXThreshold
+                0x10011964                MXC_I2C_ClearTXFIFO
+ .text.MXC_I2C_ClearFlags
                 0x10011968        0x4 /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(i2c_me17.o)
-                0x10011968                MXC_I2C_SetTXThreshold
+                0x10011968                MXC_I2C_ClearFlags
+ .text.MXC_I2C_EnableInt
+                0x1001196c        0x4 /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(i2c_me17.o)
+                0x1001196c                MXC_I2C_EnableInt
+ .text.MXC_I2C_DisableInt
+                0x10011970        0x4 /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(i2c_me17.o)
+                0x10011970                MXC_I2C_DisableInt
+ .text.MXC_I2C_Recover
+                0x10011974        0x4 /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(i2c_me17.o)
+                0x10011974                MXC_I2C_Recover
+ .text.MXC_I2C_SetRXThreshold
+                0x10011978        0x4 /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(i2c_me17.o)
+                0x10011978                MXC_I2C_SetRXThreshold
+ .text.MXC_I2C_SetTXThreshold
+                0x1001197c        0x4 /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(i2c_me17.o)
+                0x1001197c                MXC_I2C_SetTXThreshold
  .text.MXC_I2C_RevA_Init
-                0x1001196c       0xcc /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(i2c_reva.o)
-                0x1001196c                MXC_I2C_RevA_Init
+                0x10011980       0xcc /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(i2c_reva.o)
+                0x10011980                MXC_I2C_RevA_Init
  .text.MXC_I2C_RevA_SetSlaveAddr
-                0x10011a38       0x34 /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(i2c_reva.o)
-                0x10011a38                MXC_I2C_RevA_SetSlaveAddr
+                0x10011a4c       0x34 /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(i2c_reva.o)
+                0x10011a4c                MXC_I2C_RevA_SetSlaveAddr
  .text.MXC_I2C_RevA_SetFrequency
-                0x10011a6c       0xa0 /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(i2c_reva.o)
-                0x10011a6c                MXC_I2C_RevA_SetFrequency
+                0x10011a80       0xa0 /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(i2c_reva.o)
+                0x10011a80                MXC_I2C_RevA_SetFrequency
  .text.MXC_I2C_RevA_GetFrequency
-                0x10011b0c       0x20 /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(i2c_reva.o)
-                0x10011b0c                MXC_I2C_RevA_GetFrequency
+                0x10011b20       0x20 /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(i2c_reva.o)
+                0x10011b20                MXC_I2C_RevA_GetFrequency
  .text.MXC_I2C_RevA_ReadRXFIFO
-                0x10011b2c       0x3c /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(i2c_reva.o)
-                0x10011b2c                MXC_I2C_RevA_ReadRXFIFO
+                0x10011b40       0x3c /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(i2c_reva.o)
+                0x10011b40                MXC_I2C_RevA_ReadRXFIFO
  .text.MXC_I2C_RevA_GetRXFIFOAvailable
-                0x10011b68       0x10 /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(i2c_reva.o)
-                0x10011b68                MXC_I2C_RevA_GetRXFIFOAvailable
+                0x10011b7c       0x10 /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(i2c_reva.o)
+                0x10011b7c                MXC_I2C_RevA_GetRXFIFOAvailable
  .text.MXC_I2C_RevA_WriteTXFIFO
-                0x10011b78       0x30 /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(i2c_reva.o)
-                0x10011b78                MXC_I2C_RevA_WriteTXFIFO
+                0x10011b8c       0x30 /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(i2c_reva.o)
+                0x10011b8c                MXC_I2C_RevA_WriteTXFIFO
  .text.MXC_I2C_RevA_GetTXFIFOAvailable
-                0x10011ba8       0x18 /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(i2c_reva.o)
-                0x10011ba8                MXC_I2C_RevA_GetTXFIFOAvailable
+                0x10011bbc       0x18 /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(i2c_reva.o)
+                0x10011bbc                MXC_I2C_RevA_GetTXFIFOAvailable
  .text.MXC_I2C_RevA_ClearRXFIFO
-                0x10011bc0       0x10 /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(i2c_reva.o)
-                0x10011bc0                MXC_I2C_RevA_ClearRXFIFO
+                0x10011bd4       0x10 /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(i2c_reva.o)
+                0x10011bd4                MXC_I2C_RevA_ClearRXFIFO
  .text.MXC_I2C_RevA_ClearTXFIFO
-                0x10011bd0       0x10 /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(i2c_reva.o)
-                0x10011bd0                MXC_I2C_RevA_ClearTXFIFO
+                0x10011be4       0x10 /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(i2c_reva.o)
+                0x10011be4                MXC_I2C_RevA_ClearTXFIFO
  .text.MXC_I2C_RevA_ClearFlags
-                0x10011be0        0x8 /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(i2c_reva.o)
-                0x10011be0                MXC_I2C_RevA_ClearFlags
+                0x10011bf4        0x8 /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(i2c_reva.o)
+                0x10011bf4                MXC_I2C_RevA_ClearFlags
  .text.MXC_I2C_RevA_EnableInt
-                0x10011be8       0x10 /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(i2c_reva.o)
-                0x10011be8                MXC_I2C_RevA_EnableInt
+                0x10011bfc       0x10 /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(i2c_reva.o)
+                0x10011bfc                MXC_I2C_RevA_EnableInt
  .text.MXC_I2C_RevA_DisableInt
-                0x10011bf8       0x14 /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(i2c_reva.o)
-                0x10011bf8                MXC_I2C_RevA_DisableInt
+                0x10011c0c       0x14 /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(i2c_reva.o)
+                0x10011c0c                MXC_I2C_RevA_DisableInt
  .text.MXC_I2C_RevA_Recover
-                0x10011c0c       0xd8 /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(i2c_reva.o)
-                0x10011c0c                MXC_I2C_RevA_Recover
+                0x10011c20       0xd8 /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(i2c_reva.o)
+                0x10011c20                MXC_I2C_RevA_Recover
  .text.MXC_I2C_RevA_SetRXThreshold
-                0x10011ce4       0x20 /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(i2c_reva.o)
-                0x10011ce4                MXC_I2C_RevA_SetRXThreshold
+                0x10011cf8       0x20 /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(i2c_reva.o)
+                0x10011cf8                MXC_I2C_RevA_SetRXThreshold
  .text.MXC_I2C_RevA_SetTXThreshold
-                0x10011d04       0x24 /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(i2c_reva.o)
-                0x10011d04                MXC_I2C_RevA_SetTXThreshold
+                0x10011d18       0x24 /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(i2c_reva.o)
+                0x10011d18                MXC_I2C_RevA_SetTXThreshold
  .text.MXC_ICC_Enable
-                0x10011d28        0x4 /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(icc_me17.o)
-                0x10011d28                MXC_ICC_Enable
+                0x10011d3c        0x4 /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(icc_me17.o)
+                0x10011d3c                MXC_ICC_Enable
  .text.MXC_ICC_Disable
-                0x10011d2c        0x4 /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(icc_me17.o)
-                0x10011d2c                MXC_ICC_Disable
+                0x10011d40        0x4 /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(icc_me17.o)
+                0x10011d40                MXC_ICC_Disable
  .text.MXC_ICC_RevA_Enable
-                0x10011d30       0x30 /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(icc_reva.o)
-                0x10011d30                MXC_ICC_RevA_Enable
+                0x10011d44       0x30 /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(icc_reva.o)
+                0x10011d44                MXC_ICC_RevA_Enable
  .text.MXC_ICC_RevA_Disable
-                0x10011d60       0x10 /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(icc_reva.o)
-                0x10011d60                MXC_ICC_RevA_Disable
+                0x10011d74       0x10 /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(icc_reva.o)
+                0x10011d74                MXC_ICC_RevA_Disable
  .text.MXC_TRNG_Init
-                0x10011d70       0x10 /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(trng_ai85.o)
-                0x10011d70                MXC_TRNG_Init
+                0x10011d84       0x10 /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(trng_ai85.o)
+                0x10011d84                MXC_TRNG_Init
  .text.MXC_TRNG_Shutdown
-                0x10011d80       0x14 /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(trng_ai85.o)
-                0x10011d80                MXC_TRNG_Shutdown
+                0x10011d94       0x14 /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(trng_ai85.o)
+                0x10011d94                MXC_TRNG_Shutdown
  .text.MXC_TRNG_Handler
-                0x10011d94        0xc /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(trng_ai85.o)
-                0x10011d94                MXC_TRNG_Handler
+                0x10011da8        0xc /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(trng_ai85.o)
+                0x10011da8                MXC_TRNG_Handler
  .text.MXC_TRNG_RandomInt
-                0x10011da0        0xc /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(trng_ai85.o)
-                0x10011da0                MXC_TRNG_RandomInt
+                0x10011db4        0xc /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(trng_ai85.o)
+                0x10011db4                MXC_TRNG_RandomInt
  .text.MXC_TRNG_Random
-                0x10011dac        0x4 /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(trng_ai85.o)
-                0x10011dac                MXC_TRNG_Random
+                0x10011dc0        0x4 /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(trng_ai85.o)
+                0x10011dc0                MXC_TRNG_Random
  .text.MXC_TRNG_RevB_Init
-                0x10011db0        0x4 /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(trng_revb.o)
-                0x10011db0                MXC_TRNG_RevB_Init
+                0x10011dc4        0x4 /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(trng_revb.o)
+                0x10011dc4                MXC_TRNG_RevB_Init
  .text.MXC_TRNG_RevB_Shutdown
-                0x10011db4        0x4 /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(trng_revb.o)
-                0x10011db4                MXC_TRNG_RevB_Shutdown
+                0x10011dc8        0x4 /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(trng_revb.o)
+                0x10011dc8                MXC_TRNG_RevB_Shutdown
  .text.MXC_TRNG_RevB_Handler
-                0x10011db8       0x68 /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(trng_revb.o)
-                0x10011db8                MXC_TRNG_RevB_Handler
+                0x10011dcc       0x68 /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(trng_revb.o)
+                0x10011dcc                MXC_TRNG_RevB_Handler
  .text.MXC_TRNG_RevB_RandomInt
-                0x10011e20        0xc /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(trng_revb.o)
-                0x10011e20                MXC_TRNG_RevB_RandomInt
+                0x10011e34        0xc /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(trng_revb.o)
+                0x10011e34                MXC_TRNG_RevB_RandomInt
  .text.MXC_TRNG_RevB_Random
-                0x10011e2c       0x6c /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(trng_revb.o)
-                0x10011e2c                MXC_TRNG_RevB_Random
+                0x10011e40       0x6c /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(trng_revb.o)
+                0x10011e40                MXC_TRNG_RevB_Random
  .text.MXC_UART_Shutdown
-                0x10011e98       0x6c /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(uart_ai85.o)
-                0x10011e98                MXC_UART_Shutdown
+                0x10011eac       0x6c /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(uart_ai85.o)
+                0x10011eac                MXC_UART_Shutdown
  .text.MXC_UART_Init
-                0x10011f04       0xb8 /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(uart_ai85.o)
-                0x10011f04                MXC_UART_Init
+                0x10011f18       0xb8 /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(uart_ai85.o)
+                0x10011f18                MXC_UART_Init
  .text.MXC_UART_SetFrequency
-                0x10011fbc       0xd0 /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(uart_ai85.o)
-                0x10011fbc                MXC_UART_SetFrequency
+                0x10011fd0       0xd0 /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(uart_ai85.o)
+                0x10011fd0                MXC_UART_SetFrequency
  .text.MXC_UART_GetFrequency
-                0x1001208c       0x54 /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(uart_ai85.o)
-                0x1001208c                MXC_UART_GetFrequency
+                0x100120a0       0x54 /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(uart_ai85.o)
+                0x100120a0                MXC_UART_GetFrequency
  .text.MXC_UART_SetDataSize
-                0x100120e0        0x4 /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(uart_ai85.o)
-                0x100120e0                MXC_UART_SetDataSize
- .text.MXC_UART_SetStopBits
-                0x100120e4        0x4 /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(uart_ai85.o)
-                0x100120e4                MXC_UART_SetStopBits
- .text.MXC_UART_SetParity
-                0x100120e8        0x4 /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(uart_ai85.o)
-                0x100120e8                MXC_UART_SetParity
- .text.MXC_UART_ReadCharacterRaw
-                0x100120ec        0x4 /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(uart_ai85.o)
-                0x100120ec                MXC_UART_ReadCharacterRaw
- .text.MXC_UART_WriteCharacterRaw
-                0x100120f0        0x4 /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(uart_ai85.o)
-                0x100120f0                MXC_UART_WriteCharacterRaw
- .text.MXC_UART_ReadCharacter
                 0x100120f4        0x4 /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(uart_ai85.o)
-                0x100120f4                MXC_UART_ReadCharacter
- .text.MXC_UART_WriteCharacter
+                0x100120f4                MXC_UART_SetDataSize
+ .text.MXC_UART_SetStopBits
                 0x100120f8        0x4 /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(uart_ai85.o)
-                0x100120f8                MXC_UART_WriteCharacter
- .text.MXC_UART_GetRXFIFOAvailable
+                0x100120f8                MXC_UART_SetStopBits
+ .text.MXC_UART_SetParity
                 0x100120fc        0x4 /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(uart_ai85.o)
-                0x100120fc                MXC_UART_GetRXFIFOAvailable
- .text.MXC_UART_GetTXFIFOAvailable
+                0x100120fc                MXC_UART_SetParity
+ .text.MXC_UART_ReadCharacterRaw
                 0x10012100        0x4 /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(uart_ai85.o)
-                0x10012100                MXC_UART_GetTXFIFOAvailable
- .text.MXC_UART_SetRXThreshold
+                0x10012100                MXC_UART_ReadCharacterRaw
+ .text.MXC_UART_WriteCharacterRaw
                 0x10012104        0x4 /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(uart_ai85.o)
-                0x10012104                MXC_UART_SetRXThreshold
+                0x10012104                MXC_UART_WriteCharacterRaw
+ .text.MXC_UART_ReadCharacter
+                0x10012108        0x4 /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(uart_ai85.o)
+                0x10012108                MXC_UART_ReadCharacter
+ .text.MXC_UART_WriteCharacter
+                0x1001210c        0x4 /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(uart_ai85.o)
+                0x1001210c                MXC_UART_WriteCharacter
+ .text.MXC_UART_GetRXFIFOAvailable
+                0x10012110        0x4 /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(uart_ai85.o)
+                0x10012110                MXC_UART_GetRXFIFOAvailable
+ .text.MXC_UART_GetTXFIFOAvailable
+                0x10012114        0x4 /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(uart_ai85.o)
+                0x10012114                MXC_UART_GetTXFIFOAvailable
+ .text.MXC_UART_SetRXThreshold
+                0x10012118        0x4 /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(uart_ai85.o)
+                0x10012118                MXC_UART_SetRXThreshold
  .text.MXC_UART_Common_ReadCharacter
-                0x10012108       0x18 /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(uart_common.o)
-                0x10012108                MXC_UART_Common_ReadCharacter
+                0x1001211c       0x18 /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(uart_common.o)
+                0x1001211c                MXC_UART_Common_ReadCharacter
  .text.MXC_UART_Common_WriteCharacter
-                0x10012120       0x1c /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(uart_common.o)
-                0x10012120                MXC_UART_Common_WriteCharacter
+                0x10012134       0x1c /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(uart_common.o)
+                0x10012134                MXC_UART_Common_WriteCharacter
  .text.MXC_UART_RevB_Init
-                0x1001213c       0x70 /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(uart_revb.o)
-                0x1001213c                MXC_UART_RevB_Init
+                0x10012150       0x70 /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(uart_revb.o)
+                0x10012150                MXC_UART_RevB_Init
  .text.MXC_UART_RevB_SetFrequency
-                0x100121ac       0x98 /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(uart_revb.o)
-                0x100121ac                MXC_UART_RevB_SetFrequency
+                0x100121c0       0x98 /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(uart_revb.o)
+                0x100121c0                MXC_UART_RevB_SetFrequency
  .text.MXC_UART_RevB_GetFrequency
-                0x10012244       0x80 /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(uart_revb.o)
-                0x10012244                MXC_UART_RevB_GetFrequency
+                0x10012258       0x80 /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(uart_revb.o)
+                0x10012258                MXC_UART_RevB_GetFrequency
  .text.MXC_UART_RevB_SetDataSize
-                0x100122c4       0x40 /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(uart_revb.o)
-                0x100122c4                MXC_UART_RevB_SetDataSize
+                0x100122d8       0x40 /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(uart_revb.o)
+                0x100122d8                MXC_UART_RevB_SetDataSize
  .text.MXC_UART_RevB_SetStopBits
-                0x10012304       0x48 /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(uart_revb.o)
-                0x10012304                MXC_UART_RevB_SetStopBits
+                0x10012318       0x48 /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(uart_revb.o)
+                0x10012318                MXC_UART_RevB_SetStopBits
  .text.MXC_UART_RevB_SetParity
-                0x1001234c       0xac /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(uart_revb.o)
-                0x1001234c                MXC_UART_RevB_SetParity
+                0x10012360       0xac /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(uart_revb.o)
+                0x10012360                MXC_UART_RevB_SetParity
  .text.MXC_UART_RevB_ReadCharacterRaw
-                0x100123f8       0x38 /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(uart_revb.o)
-                0x100123f8                MXC_UART_RevB_ReadCharacterRaw
+                0x1001240c       0x38 /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(uart_revb.o)
+                0x1001240c                MXC_UART_RevB_ReadCharacterRaw
  .text.MXC_UART_RevB_WriteCharacterRaw
-                0x10012430       0x3c /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(uart_revb.o)
-                0x10012430                MXC_UART_RevB_WriteCharacterRaw
+                0x10012444       0x3c /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(uart_revb.o)
+                0x10012444                MXC_UART_RevB_WriteCharacterRaw
  .text.MXC_UART_RevB_GetRXFIFOAvailable
-                0x1001246c        0x8 /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(uart_revb.o)
-                0x1001246c                MXC_UART_RevB_GetRXFIFOAvailable
+                0x10012480        0x8 /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(uart_revb.o)
+                0x10012480                MXC_UART_RevB_GetRXFIFOAvailable
  .text.MXC_UART_RevB_GetTXFIFOAvailable
-                0x10012474        0xc /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(uart_revb.o)
-                0x10012474                MXC_UART_RevB_GetTXFIFOAvailable
+                0x10012488        0xc /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(uart_revb.o)
+                0x10012488                MXC_UART_RevB_GetTXFIFOAvailable
  .text.MXC_UART_RevB_SetRXThreshold
-                0x10012480       0x40 /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(uart_revb.o)
-                0x10012480                MXC_UART_RevB_SetRXThreshold
+                0x10012494       0x40 /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(uart_revb.o)
+                0x10012494                MXC_UART_RevB_SetRXThreshold
  .text.MXC_GPIO_Common_Init
-                0x100124c0       0x24 /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(gpio_common.o)
-                0x100124c0                MXC_GPIO_Common_Init
+                0x100124d4       0x24 /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(gpio_common.o)
+                0x100124d4                MXC_GPIO_Common_Init
  .text.MXC_GPIO_Common_Handler
-                0x100124e4       0x74 /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(gpio_common.o)
-                0x100124e4                MXC_GPIO_Common_Handler
- .text.strncpy  0x10012558       0x68 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-strncpy.o)
-                0x10012558                strncpy
- .text.sprintf  0x100125c0       0x40 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-sprintf.o)
-                0x100125c0                sprintf
- .text.__sread  0x10012600       0x24 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-stdio.o)
-                0x10012600                __sread
+                0x100124f8       0x74 /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(gpio_common.o)
+                0x100124f8                MXC_GPIO_Common_Handler
+ .text.strncpy  0x1001256c       0x68 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-strncpy.o)
+                0x1001256c                strncpy
+ .text.sprintf  0x100125d4       0x40 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-sprintf.o)
+                0x100125d4                sprintf
+ .text.__sread  0x10012614       0x24 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-stdio.o)
+                0x10012614                __sread
  .text.__swrite
-                0x10012624       0x40 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-stdio.o)
-                0x10012624                __swrite
- .text.__sseek  0x10012664       0x24 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-stdio.o)
-                0x10012664                __sseek
+                0x10012638       0x40 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-stdio.o)
+                0x10012638                __swrite
+ .text.__sseek  0x10012678       0x24 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-stdio.o)
+                0x10012678                __sseek
  .text.__sclose
-                0x10012688        0x8 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-stdio.o)
-                0x10012688                __sclose
+                0x1001269c        0x8 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-stdio.o)
+                0x1001269c                __sclose
  .text._write_r
-                0x10012690       0x2c /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-writer.o)
-                0x10012690                _write_r
- .text.__errno  0x100126bc        0xc /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-errno.o)
-                0x100126bc                __errno
+                0x100126a4       0x2c /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-writer.o)
+                0x100126a4                _write_r
+ .text.__errno  0x100126d0        0xc /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-errno.o)
+                0x100126d0                __errno
+ *fill*         0x100126dc        0x4 
  .text._svfprintf_r
-                0x100126c8     0x1ba0 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-svfprintf.o)
-                0x100126c8                _svfprintf_r
+                0x100126e0     0x1ba0 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-svfprintf.o)
+                0x100126e0                _svfprintf_r
  .text._malloc_r
-                0x10014268      0x574 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-mallocr.o)
-                0x10014268                _malloc_r
+                0x10014280      0x574 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-mallocr.o)
+                0x10014280                _malloc_r
  .text.startup.register_fini
-                0x100147dc       0x14 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-__call_atexit.o)
- .text.memmove  0x100147f0      0x100 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-memmove.o)
-                0x100147f0                memmove
- .text.memset   0x100148f0       0xa4 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-memset.o)
-                0x100148f0                memset
+                0x100147f4       0x14 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-__call_atexit.o)
+ .text.memmove  0x10014808      0x100 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-memmove.o)
+                0x10014808                memmove
+ .text.memset   0x10014908       0xa4 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-memset.o)
+                0x10014908                memset
  .text._wcrtomb_r
-                0x10014994       0x4c /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-wcrtomb.o)
-                0x10014994                _wcrtomb_r
+                0x100149ac       0x4c /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-wcrtomb.o)
+                0x100149ac                _wcrtomb_r
  .text.__libc_init_array
-                0x100149e0       0x50 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-init.o)
-                0x100149e0                __libc_init_array
+                0x100149f8       0x50 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-init.o)
+                0x100149f8                __libc_init_array
  .text.__libc_fini_array
-                0x10014a30       0x28 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-fini.o)
-                0x10014a30                __libc_fini_array
+                0x10014a48       0x28 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-fini.o)
+                0x10014a48                __libc_fini_array
  .text.__retarget_lock_init_recursive
-                0x10014a58        0x4 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-lock.o)
-                0x10014a58                __retarget_lock_init_recursive
+                0x10014a70        0x4 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-lock.o)
+                0x10014a70                __retarget_lock_init_recursive
  .text.__retarget_lock_close_recursive
-                0x10014a5c        0x4 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-lock.o)
-                0x10014a5c                __retarget_lock_close_recursive
+                0x10014a74        0x4 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-lock.o)
+                0x10014a74                __retarget_lock_close_recursive
  .text.__retarget_lock_acquire_recursive
-                0x10014a60        0x4 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-lock.o)
-                0x10014a60                __retarget_lock_acquire_recursive
+                0x10014a78        0x4 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-lock.o)
+                0x10014a78                __retarget_lock_acquire_recursive
  .text.__retarget_lock_release_recursive
-                0x10014a64        0x4 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-lock.o)
-                0x10014a64                __retarget_lock_release_recursive
+                0x10014a7c        0x4 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-lock.o)
+                0x10014a7c                __retarget_lock_release_recursive
  .text.__locale_mb_cur_max
-                0x10014a68        0xc /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-locale.o)
-                0x10014a68                __locale_mb_cur_max
+                0x10014a80        0xc /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-locale.o)
+                0x10014a80                __locale_mb_cur_max
  .text._localeconv_r
-                0x10014a74        0x8 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-localeconv.o)
-                0x10014a74                _localeconv_r
+                0x10014a8c        0x8 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-localeconv.o)
+                0x10014a8c                _localeconv_r
  .text._fclose_r
-                0x10014a7c       0xc0 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-fclose.o)
-                0x10014a7c                _fclose_r
- .text.sysconf  0x10014b3c       0x1c /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-sysconf.o)
-                0x10014b3c                sysconf
- .text.printf   0x10014b58       0x28 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-printf.o)
-                0x10014b58                printf
- .text._puts_r  0x10014b80       0x98 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-puts.o)
-                0x10014b80                _puts_r
- .text.puts     0x10014c18       0x10 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-puts.o)
-                0x10014c18                puts
+                0x10014a94       0xc0 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-fclose.o)
+                0x10014a94                _fclose_r
+ .text.sysconf  0x10014b54       0x1c /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-sysconf.o)
+                0x10014b54                sysconf
+ .text.printf   0x10014b70       0x28 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-printf.o)
+                0x10014b70                printf
+ .text._puts_r  0x10014b98       0x98 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-puts.o)
+                0x10014b98                _puts_r
+ .text.puts     0x10014c30       0x10 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-puts.o)
+                0x10014c30                puts
  .text.__malloc_lock
-                0x10014c28        0xc /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-mlock.o)
-                0x10014c28                __malloc_lock
+                0x10014c40        0xc /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-mlock.o)
+                0x10014c40                __malloc_lock
  .text.__malloc_unlock
-                0x10014c34        0xc /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-mlock.o)
-                0x10014c34                __malloc_unlock
- .text.atexit   0x10014c40        0xc /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-atexit.o)
-                0x10014c40                atexit
+                0x10014c4c        0xc /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-mlock.o)
+                0x10014c4c                __malloc_unlock
+ .text.atexit   0x10014c58        0xc /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-atexit.o)
+                0x10014c58                atexit
  .text._wcsrtombs_r
-                0x10014c4c       0x18 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-wcsrtombs.o)
-                0x10014c4c                _wcsrtombs_r
- .text.quorem   0x10014c64      0x12c /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-dtoa.o)
- .text._dtoa_r  0x10014d90      0xe44 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-dtoa.o)
-                0x10014d90                _dtoa_r
+                0x10014c64       0x18 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-wcsrtombs.o)
+                0x10014c64                _wcsrtombs_r
+ .text.quorem   0x10014c7c      0x12c /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-dtoa.o)
+ .text._dtoa_r  0x10014da8      0xe44 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-dtoa.o)
+                0x10014da8                _dtoa_r
  .text._close_r
-                0x10015bd4       0x24 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-closer.o)
-                0x10015bd4                _close_r
+                0x10015bec       0x24 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-closer.o)
+                0x10015bec                _close_r
  .text.__sflush_r
-                0x10015bf8      0x138 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-fflush.o)
-                0x10015bf8                __sflush_r
+                0x10015c10      0x138 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-fflush.o)
+                0x10015c10                __sflush_r
  .text._fflush_r
-                0x10015d30       0x54 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-fflush.o)
-                0x10015d30                _fflush_r
+                0x10015d48       0x54 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-fflush.o)
+                0x10015d48                _fflush_r
  .text.stdio_exit_handler
-                0x10015d84       0x18 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-findfp.o)
+                0x10015d9c       0x18 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-findfp.o)
  .text.cleanup_stdio
-                0x10015d9c       0x40 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-findfp.o)
+                0x10015db4       0x40 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-findfp.o)
  .text.global_stdio_init.part.0
-                0x10015ddc       0xf0 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-findfp.o)
- .text.__sinit  0x10015ecc       0x3c /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-findfp.o)
-                0x10015ecc                __sinit
+                0x10015df4       0xf0 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-findfp.o)
+ .text.__sinit  0x10015ee4       0x3c /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-findfp.o)
+                0x10015ee4                __sinit
  .text.__sfp_lock_acquire
-                0x10015f08        0xc /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-findfp.o)
-                0x10015f08                __sfp_lock_acquire
+                0x10015f20        0xc /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-findfp.o)
+                0x10015f20                __sfp_lock_acquire
  .text.__sfp_lock_release
-                0x10015f14        0xc /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-findfp.o)
-                0x10015f14                __sfp_lock_release
- .text          0x10015f20       0xa0 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-memchr.o)
-                0x10015f20                memchr
- .text          0x10015fc0      0x134 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-memcpy.o)
-                0x10015fc0                memcpy
- *fill*         0x100160f4        0xc 
- .text          0x10016100       0xd8 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-strlen.o)
-                0x10016100                strlen
- .text.frexp    0x100161d8       0x70 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libm_a-s_frexp.o)
-                0x100161d8                frexp
+                0x10015f2c        0xc /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-findfp.o)
+                0x10015f2c                __sfp_lock_release
+ *fill*         0x10015f38        0x8 
+ .text          0x10015f40       0xa0 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-memchr.o)
+                0x10015f40                memchr
+ .text          0x10015fe0      0x134 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-memcpy.o)
+                0x10015fe0                memcpy
+ *fill*         0x10016114       0x2c 
+ .text          0x10016140       0xd8 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-strlen.o)
+                0x10016140                strlen
+ .text.frexp    0x10016218       0x70 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libm_a-s_frexp.o)
+                0x10016218                frexp
  .text._realloc_r
-                0x10016248      0x344 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-reallocr.o)
-                0x10016248                _realloc_r
+                0x10016288      0x344 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-reallocr.o)
+                0x10016288                _realloc_r
  .text._malloc_trim_r
-                0x1001658c       0xb8 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-freer.o)
-                0x1001658c                _malloc_trim_r
- .text._free_r  0x10016644      0x1fc /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-freer.o)
-                0x10016644                _free_r
+                0x100165cc       0xb8 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-freer.o)
+                0x100165cc                _malloc_trim_r
+ .text._free_r  0x10016684      0x1fc /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-freer.o)
+                0x10016684                _free_r
  .text._fstat_r
-                0x10016840       0x2c /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-fstatr.o)
-                0x10016840                _fstat_r
+                0x10016880       0x2c /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-fstatr.o)
+                0x10016880                _fstat_r
  .text._lseek_r
-                0x1001686c       0x2c /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-lseekr.o)
-                0x1001686c                _lseek_r
- .text._read_r  0x10016898       0x2c /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-readr.o)
-                0x10016898                _read_r
+                0x100168ac       0x2c /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-lseekr.o)
+                0x100168ac                _lseek_r
+ .text._read_r  0x100168d8       0x2c /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-readr.o)
+                0x100168d8                _read_r
  .text.__ascii_wctomb
-                0x100168c4       0x1c /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-wctomb_r.o)
-                0x100168c4                __ascii_wctomb
- .text._sbrk_r  0x100168e0       0x24 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-sbrkr.o)
-                0x100168e0                _sbrk_r
+                0x10016904       0x1c /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-wctomb_r.o)
+                0x10016904                __ascii_wctomb
+ .text._sbrk_r  0x10016920       0x24 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-sbrkr.o)
+                0x10016920                _sbrk_r
  .text.__sfvwrite_r
-                0x10016904      0x300 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-fvwrite.o)
-                0x10016904                __sfvwrite_r
+                0x10016944      0x300 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-fvwrite.o)
+                0x10016944                __sfvwrite_r
  .text._fwalk_sglue
-                0x10016c04       0x48 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-fwalk.o)
-                0x10016c04                _fwalk_sglue
+                0x10016c44       0x48 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-fwalk.o)
+                0x10016c44                _fwalk_sglue
  .text.__ssprint_r
-                0x10016c4c      0x108 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-svfiprintf.o)
-                0x10016c4c                __ssprint_r
- *fill*         0x10016d54        0x4 
+                0x10016c8c      0x108 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-svfiprintf.o)
+                0x10016c8c                __ssprint_r
+ *fill*         0x10016d94        0x4 
  .text._vfprintf_r
-                0x10016d58     0x1c50 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-vfprintf.o)
-                0x10016d58                _vfprintf_r
+                0x10016d98     0x1c50 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-vfprintf.o)
+                0x10016d98                _vfprintf_r
  .text.__sbprintf
-                0x100189a8       0x80 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-vfprintf.o)
+                0x100189e8       0x80 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-vfprintf.o)
  .text.__sprint_r.part.0
-                0x10018a28       0x78 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-vfiprintf.o)
+                0x10018a68       0x78 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-vfiprintf.o)
  .text.__sprint_r
-                0x10018aa0       0x18 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-vfiprintf.o)
-                0x10018aa0                __sprint_r
+                0x10018ae0       0x18 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-vfiprintf.o)
+                0x10018ae0                __sprint_r
  .text._vfiprintf_r
-                0x10018ab8      0xfa8 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-vfiprintf.o)
-                0x10018ab8                _vfiprintf_r
+                0x10018af8      0xfa8 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-vfiprintf.o)
+                0x10018af8                _vfiprintf_r
  .text.__sbprintf
-                0x10019a60       0x80 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-vfiprintf.o)
+                0x10019aa0       0x80 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-vfiprintf.o)
  .text.__register_exitproc
-                0x10019ae0       0x80 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-__atexit.o)
-                0x10019ae0                __register_exitproc
+                0x10019b20       0x80 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-__atexit.o)
+                0x10019b20                __register_exitproc
  .text.__ascii_mbtowc
-                0x10019b60       0x2c /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-mbtowc_r.o)
-                0x10019b60                __ascii_mbtowc
+                0x10019ba0       0x2c /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-mbtowc_r.o)
+                0x10019ba0                __ascii_mbtowc
  .text.__assert_func
-                0x10019b8c       0x40 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-assert.o)
-                0x10019b8c                __assert_func
+                0x10019bcc       0x40 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-assert.o)
+                0x10019bcc                __assert_func
  .text.__swsetup_r
-                0x10019bcc       0xc0 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-wsetup.o)
-                0x10019bcc                __swsetup_r
+                0x10019c0c       0xc0 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-wsetup.o)
+                0x10019c0c                __swsetup_r
  .text.__smakebuf_r
-                0x10019c8c       0xdc /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-makebuf.o)
-                0x10019c8c                __smakebuf_r
- .text._Balloc  0x10019d68       0x4c /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-mprec.o)
-                0x10019d68                _Balloc
- .text._Bfree   0x10019db4       0x14 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-mprec.o)
-                0x10019db4                _Bfree
+                0x10019ccc       0xdc /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-makebuf.o)
+                0x10019ccc                __smakebuf_r
+ .text._Balloc  0x10019da8       0x4c /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-mprec.o)
+                0x10019da8                _Balloc
+ .text._Bfree   0x10019df4       0x14 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-mprec.o)
+                0x10019df4                _Bfree
  .text.__multadd
-                0x10019dc8       0xa0 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-mprec.o)
-                0x10019dc8                __multadd
+                0x10019e08       0xa0 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-mprec.o)
+                0x10019e08                __multadd
  .text.__hi0bits
-                0x10019e68       0x44 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-mprec.o)
-                0x10019e68                __hi0bits
+                0x10019ea8       0x44 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-mprec.o)
+                0x10019ea8                __hi0bits
  .text.__lo0bits
-                0x10019eac       0x60 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-mprec.o)
-                0x10019eac                __lo0bits
- .text.__i2b    0x10019f0c       0x5c /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-mprec.o)
-                0x10019f0c                __i2b
+                0x10019eec       0x60 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-mprec.o)
+                0x10019eec                __lo0bits
+ .text.__i2b    0x10019f4c       0x5c /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-mprec.o)
+                0x10019f4c                __i2b
  .text.__multiply
-                0x10019f68      0x16c /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-mprec.o)
-                0x10019f68                __multiply
+                0x10019fa8      0x16c /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-mprec.o)
+                0x10019fa8                __multiply
  .text.__pow5mult
-                0x1001a0d4       0xb4 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-mprec.o)
-                0x1001a0d4                __pow5mult
+                0x1001a114       0xb4 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-mprec.o)
+                0x1001a114                __pow5mult
  .text.__lshift
-                0x1001a188       0xf0 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-mprec.o)
-                0x1001a188                __lshift
- .text.__mcmp   0x1001a278       0x44 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-mprec.o)
-                0x1001a278                __mcmp
- .text.__mdiff  0x1001a2bc      0x164 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-mprec.o)
-                0x1001a2bc                __mdiff
- .text.__d2b    0x1001a420       0xbc /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-mprec.o)
-                0x1001a420                __d2b
+                0x1001a1c8       0xf0 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-mprec.o)
+                0x1001a1c8                __lshift
+ .text.__mcmp   0x1001a2b8       0x44 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-mprec.o)
+                0x1001a2b8                __mcmp
+ .text.__mdiff  0x1001a2fc      0x164 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-mprec.o)
+                0x1001a2fc                __mdiff
+ .text.__d2b    0x1001a460       0xbc /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-mprec.o)
+                0x1001a460                __d2b
  .text._calloc_r
-                0x1001a4dc       0x6c /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-callocr.o)
-                0x1001a4dc                _calloc_r
+                0x1001a51c       0x6c /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-callocr.o)
+                0x1001a51c                _calloc_r
  .text._wcsnrtombs_l
-                0x1001a548       0xfc /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-wcsnrtombs.o)
-                0x1001a548                _wcsnrtombs_l
+                0x1001a588       0xfc /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-wcsnrtombs.o)
+                0x1001a588                _wcsnrtombs_l
  .text._wcsnrtombs_r
-                0x1001a644       0x24 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-wcsnrtombs.o)
-                0x1001a644                _wcsnrtombs_r
+                0x1001a684       0x24 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-wcsnrtombs.o)
+                0x1001a684                _wcsnrtombs_r
  .text._isatty_r
-                0x1001a668       0x24 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-isattyr.o)
-                0x1001a668                _isatty_r
+                0x1001a6a8       0x24 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-isattyr.o)
+                0x1001a6a8                _isatty_r
  .text.fiprintf
-                0x1001a68c       0x28 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-fiprintf.o)
-                0x1001a68c                fiprintf
+                0x1001a6cc       0x28 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-fiprintf.o)
+                0x1001a6cc                fiprintf
  .text.__fputwc
-                0x1001a6b4       0x7c /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-fputwc.o)
-                0x1001a6b4                __fputwc
+                0x1001a6f4       0x7c /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-fputwc.o)
+                0x1001a6f4                __fputwc
  .text._fputwc_r
-                0x1001a730       0x60 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-fputwc.o)
-                0x1001a730                _fputwc_r
+                0x1001a770       0x60 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-fputwc.o)
+                0x1001a770                _fputwc_r
  .text.__swbuf_r
-                0x1001a790       0xac /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-wbuf.o)
-                0x1001a790                __swbuf_r
- .text.abort    0x1001a83c       0x10 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-abort.o)
-                0x1001a83c                abort
- .text.raise    0x1001a84c       0x58 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-signal.o)
-                0x1001a84c                raise
- .text._kill_r  0x1001a8a4       0x2c /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-signalr.o)
-                0x1001a8a4                _kill_r
+                0x1001a7d0       0xac /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-wbuf.o)
+                0x1001a7d0                __swbuf_r
+ .text.abort    0x1001a87c       0x10 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-abort.o)
+                0x1001a87c                abort
+ .text.raise    0x1001a88c       0x58 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-signal.o)
+                0x1001a88c                raise
+ .text._kill_r  0x1001a8e4       0x2c /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-signalr.o)
+                0x1001a8e4                _kill_r
  .text._getpid_r
-                0x1001a8d0        0x4 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-signalr.o)
-                0x1001a8d0                _getpid_r
- .text._getpid  0x1001a8d4       0x10 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libnosys.a(getpid.o)
-                0x1001a8d4                _getpid
- .text._kill    0x1001a8e4       0x10 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libnosys.a(kill.o)
-                0x1001a8e4                _kill
- .text._exit    0x1001a8f4        0x4 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libnosys.a(_exit.o)
-                0x1001a8f4                _exit
- .text          0x1001a8f8      0x378 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v7e-m+fp/softfp/libgcc.a(_arm_addsubdf3.o)
-                0x1001a8f8                __aeabi_drsub
-                0x1001a900                __aeabi_dsub
-                0x1001a900                __subdf3
-                0x1001a904                __adddf3
-                0x1001a904                __aeabi_dadd
-                0x1001ab7c                __aeabi_ui2d
-                0x1001ab7c                __floatunsidf
-                0x1001ab9c                __floatsidf
-                0x1001ab9c                __aeabi_i2d
-                0x1001abc0                __extendsfdf2
-                0x1001abc0                __aeabi_f2d
-                0x1001ac04                __aeabi_ul2d
-                0x1001ac04                __floatundidf
-                0x1001ac14                __floatdidf
-                0x1001ac14                __aeabi_l2d
- .text          0x1001ac70      0x424 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v7e-m+fp/softfp/libgcc.a(_arm_muldivdf3.o)
-                0x1001ac70                __aeabi_dmul
-                0x1001ac70                __muldf3
-                0x1001aec4                __aeabi_ddiv
-                0x1001aec4                __divdf3
- .text          0x1001b094      0x110 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v7e-m+fp/softfp/libgcc.a(_arm_cmpdf2.o)
-                0x1001b094                __gtdf2
-                0x1001b094                __gedf2
-                0x1001b09c                __ltdf2
-                0x1001b09c                __ledf2
-                0x1001b0a4                __cmpdf2
-                0x1001b0a4                __eqdf2
-                0x1001b0a4                __nedf2
-                0x1001b120                __aeabi_cdrcmple
-                0x1001b130                __aeabi_cdcmple
-                0x1001b130                __aeabi_cdcmpeq
-                0x1001b140                __aeabi_dcmpeq
-                0x1001b154                __aeabi_dcmplt
-                0x1001b168                __aeabi_dcmple
-                0x1001b17c                __aeabi_dcmpge
-                0x1001b190                __aeabi_dcmpgt
- .text          0x1001b1a4       0x2c /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v7e-m+fp/softfp/libgcc.a(_arm_unorddf2.o)
-                0x1001b1a4                __aeabi_dcmpun
-                0x1001b1a4                __unorddf2
- .text          0x1001b1d0       0x50 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v7e-m+fp/softfp/libgcc.a(_arm_fixdfsi.o)
-                0x1001b1d0                __fixdfsi
-                0x1001b1d0                __aeabi_d2iz
- .text          0x1001b220       0x30 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v7e-m+fp/softfp/libgcc.a(_aeabi_uldivmod.o)
-                0x1001b220                __aeabi_uldivmod
+                0x1001a910        0x4 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-signalr.o)
+                0x1001a910                _getpid_r
+ .text._getpid  0x1001a914       0x10 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libnosys.a(getpid.o)
+                0x1001a914                _getpid
+ .text._kill    0x1001a924       0x10 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libnosys.a(kill.o)
+                0x1001a924                _kill
+ .text._exit    0x1001a934        0x4 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libnosys.a(_exit.o)
+                0x1001a934                _exit
+ .text          0x1001a938      0x378 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v7e-m+fp/softfp/libgcc.a(_arm_addsubdf3.o)
+                0x1001a938                __aeabi_drsub
+                0x1001a940                __aeabi_dsub
+                0x1001a940                __subdf3
+                0x1001a944                __adddf3
+                0x1001a944                __aeabi_dadd
+                0x1001abbc                __aeabi_ui2d
+                0x1001abbc                __floatunsidf
+                0x1001abdc                __floatsidf
+                0x1001abdc                __aeabi_i2d
+                0x1001ac00                __extendsfdf2
+                0x1001ac00                __aeabi_f2d
+                0x1001ac44                __aeabi_ul2d
+                0x1001ac44                __floatundidf
+                0x1001ac54                __floatdidf
+                0x1001ac54                __aeabi_l2d
+ .text          0x1001acb0      0x424 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v7e-m+fp/softfp/libgcc.a(_arm_muldivdf3.o)
+                0x1001acb0                __aeabi_dmul
+                0x1001acb0                __muldf3
+                0x1001af04                __aeabi_ddiv
+                0x1001af04                __divdf3
+ .text          0x1001b0d4      0x110 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v7e-m+fp/softfp/libgcc.a(_arm_cmpdf2.o)
+                0x1001b0d4                __gtdf2
+                0x1001b0d4                __gedf2
+                0x1001b0dc                __ltdf2
+                0x1001b0dc                __ledf2
+                0x1001b0e4                __cmpdf2
+                0x1001b0e4                __eqdf2
+                0x1001b0e4                __nedf2
+                0x1001b160                __aeabi_cdrcmple
+                0x1001b170                __aeabi_cdcmple
+                0x1001b170                __aeabi_cdcmpeq
+                0x1001b180                __aeabi_dcmpeq
+                0x1001b194                __aeabi_dcmplt
+                0x1001b1a8                __aeabi_dcmple
+                0x1001b1bc                __aeabi_dcmpge
+                0x1001b1d0                __aeabi_dcmpgt
+ .text          0x1001b1e4       0x2c /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v7e-m+fp/softfp/libgcc.a(_arm_unorddf2.o)
+                0x1001b1e4                __aeabi_dcmpun
+                0x1001b1e4                __unorddf2
+ .text          0x1001b210       0x50 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v7e-m+fp/softfp/libgcc.a(_arm_fixdfsi.o)
+                0x1001b210                __fixdfsi
+                0x1001b210                __aeabi_d2iz
+ .text          0x1001b260       0x30 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v7e-m+fp/softfp/libgcc.a(_aeabi_uldivmod.o)
+                0x1001b260                __aeabi_uldivmod
  .text.__udivmoddi4
-                0x1001b250      0x2bc /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v7e-m+fp/softfp/libgcc.a(_udivmoddi4.o)
-                0x1001b250                __udivmoddi4
- .text          0x1001b50c        0x4 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v7e-m+fp/softfp/libgcc.a(_dvmd_tls.o)
-                0x1001b50c                __aeabi_ldiv0
-                0x1001b50c                __aeabi_idiv0
+                0x1001b290      0x2bc /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v7e-m+fp/softfp/libgcc.a(_udivmoddi4.o)
+                0x1001b290                __udivmoddi4
+ .text          0x1001b54c        0x4 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v7e-m+fp/softfp/libgcc.a(_dvmd_tls.o)
+                0x1001b54c                __aeabi_ldiv0
+                0x1001b54c                __aeabi_idiv0
  *(.rodata*)
  .rodata.process_boot.str1.4
-                0x1001b510       0x41 /Pace-2024-ectf/component/build/component.o
- *fill*         0x1001b551        0x3 
+                0x1001b550       0x55 /Pace-2024-ectf/component/build/component.o
+ *fill*         0x1001b5a5        0x3 
  .rodata.process_attest.str1.4
-                0x1001b554       0x37 /Pace-2024-ectf/component/build/component.o
- *fill*         0x1001b58b        0x1 
+                0x1001b5a8       0x37 /Pace-2024-ectf/component/build/component.o
+ *fill*         0x1001b5df        0x1 
  .rodata.component_process_cmd.str1.4
-                0x1001b58c       0x41 /Pace-2024-ectf/component/build/component.o
- *fill*         0x1001b5cd        0x3 
+                0x1001b5e0       0x41 /Pace-2024-ectf/component/build/component.o
+ *fill*         0x1001b621        0x3 
  .rodata.main.str1.4
-                0x1001b5d0       0x12 /Pace-2024-ectf/component/build/component.o
- *fill*         0x1001b5e2        0x2 
+                0x1001b624       0x12 /Pace-2024-ectf/component/build/component.o
+ *fill*         0x1001b636        0x2 
  .rodata.FINAL_MASK
-                0x1001b5e4       0x10 /Pace-2024-ectf/component/build/key.o
-                0x1001b5e4                FINAL_MASK
- .rodata.MASK   0x1001b5f4       0x10 /Pace-2024-ectf/component/build/key.o
-                0x1001b5f4                MASK
+                0x1001b638       0x10 /Pace-2024-ectf/component/build/key.o
+                0x1001b638                FINAL_MASK
+ .rodata.MASK   0x1001b648       0x10 /Pace-2024-ectf/component/build/key.o
+                0x1001b648                MASK
  .rodata.i2c_simple_peripheral_init.str1.4
-                0x1001b604       0x1a /Pace-2024-ectf/component/build/simple_i2c_peripheral.o
- *fill*         0x1001b61e        0x2 
- .rodata.Td4    0x1001b620      0x100 /Pace-2024-ectf/component/build/aes.o
- .rodata.Td     0x1001b720     0x1000 /Pace-2024-ectf/component/build/aes.o
- .rodata.Te     0x1001c720     0x1000 /Pace-2024-ectf/component/build/aes.o
- .rodata.rcon   0x1001d720       0x28 /Pace-2024-ectf/component/build/aes.o
+                0x1001b658       0x1a /Pace-2024-ectf/component/build/simple_i2c_peripheral.o
+ *fill*         0x1001b672        0x2 
+ .rodata.Td4    0x1001b674      0x100 /Pace-2024-ectf/component/build/aes.o
+ .rodata.Td     0x1001b774     0x1000 /Pace-2024-ectf/component/build/aes.o
+ .rodata.Te     0x1001c774     0x1000 /Pace-2024-ectf/component/build/aes.o
+ .rodata.rcon   0x1001d774       0x28 /Pace-2024-ectf/component/build/aes.o
  .rodata.mxc_assert.str1.4
-                0x1001d748       0x19 /Pace-2024-ectf/component/build/board.o
- *fill*         0x1001d761        0x3 
+                0x1001d79c       0x19 /Pace-2024-ectf/component/build/board.o
+ *fill*         0x1001d7b5        0x3 
  .rodata.Board_Init.str1.4
-                0x1001d764       0x4d /Pace-2024-ectf/component/build/board.o
- *fill*         0x1001d7b1        0x3 
+                0x1001d7b8       0x4d /Pace-2024-ectf/component/build/board.o
+ *fill*         0x1001d805        0x3 
  .rodata.num_leds
-                0x1001d7b4        0x4 /Pace-2024-ectf/component/build/board.o
-                0x1001d7b4                num_leds
+                0x1001d808        0x4 /Pace-2024-ectf/component/build/board.o
+                0x1001d808                num_leds
  .rodata.led_pin
-                0x1001d7b8       0x24 /Pace-2024-ectf/component/build/board.o
-                0x1001d7b8                led_pin
+                0x1001d80c       0x24 /Pace-2024-ectf/component/build/board.o
+                0x1001d80c                led_pin
  .rodata.num_pbs
-                0x1001d7dc        0x4 /Pace-2024-ectf/component/build/board.o
-                0x1001d7dc                num_pbs
+                0x1001d830        0x4 /Pace-2024-ectf/component/build/board.o
+                0x1001d830                num_pbs
  .rodata.pb_pin
-                0x1001d7e0       0x18 /Pace-2024-ectf/component/build/board.o
-                0x1001d7e0                pb_pin
+                0x1001d834       0x18 /Pace-2024-ectf/component/build/board.o
+                0x1001d834                pb_pin
  .rodata.LED_On.str1.4
-                0x1001d7f8       0x47 /Pace-2024-ectf/component/build/led.o
- *fill*         0x1001d83f        0x1 
+                0x1001d84c       0x47 /Pace-2024-ectf/component/build/led.o
+ *fill*         0x1001d893        0x1 
  .rodata.gpio_cfg_uart3
-                0x1001d840        0xc /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(pins_ai85.o)
-                0x1001d840                gpio_cfg_uart3
- .rodata.gpio_cfg_uart2
-                0x1001d84c        0xc /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(pins_ai85.o)
-                0x1001d84c                gpio_cfg_uart2
- .rodata.gpio_cfg_uart1
-                0x1001d858        0xc /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(pins_ai85.o)
-                0x1001d858                gpio_cfg_uart1
- .rodata.gpio_cfg_uart0
-                0x1001d864        0xc /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(pins_ai85.o)
-                0x1001d864                gpio_cfg_uart0
- .rodata.gpio_cfg_i2c2
-                0x1001d870        0xc /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(pins_ai85.o)
-                0x1001d870                gpio_cfg_i2c2
- .rodata.gpio_cfg_i2c1
-                0x1001d87c        0xc /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(pins_ai85.o)
-                0x1001d87c                gpio_cfg_i2c1
- .rodata.gpio_cfg_i2c0
-                0x1001d888        0xc /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(pins_ai85.o)
-                0x1001d888                gpio_cfg_i2c0
- .rodata.gpio_cfg_extclk
                 0x1001d894        0xc /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(pins_ai85.o)
-                0x1001d894                gpio_cfg_extclk
+                0x1001d894                gpio_cfg_uart3
+ .rodata.gpio_cfg_uart2
+                0x1001d8a0        0xc /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(pins_ai85.o)
+                0x1001d8a0                gpio_cfg_uart2
+ .rodata.gpio_cfg_uart1
+                0x1001d8ac        0xc /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(pins_ai85.o)
+                0x1001d8ac                gpio_cfg_uart1
+ .rodata.gpio_cfg_uart0
+                0x1001d8b8        0xc /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(pins_ai85.o)
+                0x1001d8b8                gpio_cfg_uart0
+ .rodata.gpio_cfg_i2c2
+                0x1001d8c4        0xc /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(pins_ai85.o)
+                0x1001d8c4                gpio_cfg_i2c2
+ .rodata.gpio_cfg_i2c1
+                0x1001d8d0        0xc /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(pins_ai85.o)
+                0x1001d8d0                gpio_cfg_i2c1
+ .rodata.gpio_cfg_i2c0
+                0x1001d8dc        0xc /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(pins_ai85.o)
+                0x1001d8dc                gpio_cfg_i2c0
+ .rodata.gpio_cfg_extclk
+                0x1001d8e8        0xc /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(pins_ai85.o)
+                0x1001d8e8                gpio_cfg_extclk
  .rodata.MXC_GPIO_Common_Handler.str1.4
-                0x1001d8a0       0x6e /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(gpio_common.o)
- *fill*         0x1001d90e        0x2 
+                0x1001d8f4       0x6e /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(gpio_common.o)
+ *fill*         0x1001d962        0x2 
  .rodata.CSWTCH.16
-                0x1001d910        0xc /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(gpio_common.o)
+                0x1001d964        0xc /Pace-2024-ectf/msdk/Libraries/PeriphDrivers/bin/MAX78000/softfp/libPeriphDriver_softfp.a(gpio_common.o)
  .rodata._svfprintf_r.str1.4
-                0x1001d91c       0x42 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-svfprintf.o)
- *fill*         0x1001d95e        0x2 
+                0x1001d970       0x42 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-svfprintf.o)
+ *fill*         0x1001d9b2        0x2 
  .rodata.zeroes.0
-                0x1001d960       0x10 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-svfprintf.o)
+                0x1001d9b4       0x10 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-svfprintf.o)
  .rodata.blanks.1
-                0x1001d970       0x10 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-svfprintf.o)
+                0x1001d9c4       0x10 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-svfprintf.o)
  .rodata.str1.4
-                0x1001d980       0x44 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-locale.o)
+                0x1001d9d4       0x44 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-locale.o)
                                  0x4c (size before relaxing)
  .rodata._puts_r.str1.4
-                0x1001d9c4        0x2 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-puts.o)
- *fill*         0x1001d9c6        0x2 
+                0x1001da18        0x2 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-puts.o)
+ *fill*         0x1001da1a        0x2 
  .rodata._dtoa_r.str1.4
-                0x1001d9c8       0x7d /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-dtoa.o)
+                0x1001da1c       0x7d /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-dtoa.o)
                                  0x81 (size before relaxing)
- *fill*         0x1001da45        0x3 
+ *fill*         0x1001da99        0x3 
  .rodata._ctype_
-                0x1001da48      0x101 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-ctype_.o)
-                0x1001da48                _ctype_
+                0x1001da9c      0x101 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-ctype_.o)
+                0x1001da9c                _ctype_
  .rodata._vfprintf_r.str1.4
-                0x1001db49       0x42 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-vfprintf.o)
- *fill*         0x1001db49        0x3 
+                0x1001db9d       0x42 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-vfprintf.o)
+ *fill*         0x1001db9d        0x3 
  .rodata.zeroes.0
-                0x1001db4c       0x10 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-vfprintf.o)
+                0x1001dba0       0x10 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-vfprintf.o)
  .rodata.blanks.1
-                0x1001db5c       0x10 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-vfprintf.o)
+                0x1001dbb0       0x10 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-vfprintf.o)
  .rodata._vfiprintf_r.str1.4
-                0x1001db6c       0x2f /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-vfiprintf.o)
+                0x1001dbc0       0x2f /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-vfiprintf.o)
  .rodata.zeroes.0
-                0x1001db6c       0x10 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-vfiprintf.o)
+                0x1001dbc0       0x10 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-vfiprintf.o)
  .rodata.blanks.1
-                0x1001db7c       0x10 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-vfiprintf.o)
+                0x1001dbd0       0x10 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-vfiprintf.o)
  .rodata.__assert_func.str1.4
-                0x1001db8c       0x3f /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-assert.o)
+                0x1001dbe0       0x3f /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-assert.o)
                                  0x43 (size before relaxing)
- *fill*         0x1001dbcb        0x1 
+ *fill*         0x1001dc1f        0x1 
  .rodata.__multadd.str1.4
-                0x1001dbcc       0x5a /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-mprec.o)
+                0x1001dc20       0x5a /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-mprec.o)
                                  0x6e (size before relaxing)
- *fill*         0x1001dc26        0x2 
- .rodata.p05.0  0x1001dc28        0xc /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-mprec.o)
- *fill*         0x1001dc34        0x4 
+ *fill*         0x1001dc7a        0x2 
+ .rodata.p05.0  0x1001dc7c        0xc /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-mprec.o)
  .rodata.__mprec_bigtens
-                0x1001dc38       0x28 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-mprec.o)
-                0x1001dc38                __mprec_bigtens
+                0x1001dc88       0x28 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-mprec.o)
+                0x1001dc88                __mprec_bigtens
  .rodata.__mprec_tens
-                0x1001dc60       0xc8 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-mprec.o)
-                0x1001dc60                __mprec_tens
+                0x1001dcb0       0xc8 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-mprec.o)
+                0x1001dcb0                __mprec_tens
  *(.init)
- .init          0x1001dd28        0x4 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v7e-m+fp/softfp/crti.o
-                0x1001dd28                _init
- .init          0x1001dd2c        0x8 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v7e-m+fp/softfp/crtn.o
+ .init          0x1001dd78        0x4 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v7e-m+fp/softfp/crti.o
+                0x1001dd78                _init
+ .init          0x1001dd7c        0x8 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v7e-m+fp/softfp/crtn.o
  *(.fini)
- .fini          0x1001dd34        0x4 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v7e-m+fp/softfp/crti.o
-                0x1001dd34                _fini
- .fini          0x1001dd38        0x8 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v7e-m+fp/softfp/crtn.o
+ .fini          0x1001dd84        0x4 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v7e-m+fp/softfp/crti.o
+                0x1001dd84                _fini
+ .fini          0x1001dd88        0x8 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v7e-m+fp/softfp/crtn.o
  *(.eh_frame*)
- .eh_frame      0x1001dd40        0x0 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v7e-m+fp/softfp/crtbegin.o
- .eh_frame      0x1001dd40       0x50 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-memchr.o)
- .eh_frame      0x1001dd90       0x2c /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-memcpy.o)
- .eh_frame      0x1001ddbc       0x34 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-strlen.o)
- .eh_frame      0x1001ddf0        0x4 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v7e-m+fp/softfp/crtend.o
-                0x1001ddf4                        _etext = .
+ .eh_frame      0x1001dd90        0x0 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v7e-m+fp/softfp/crtbegin.o
+ .eh_frame      0x1001dd90       0x50 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-memchr.o)
+ .eh_frame      0x1001dde0       0x2c /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-memcpy.o)
+ .eh_frame      0x1001de0c       0x34 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-strlen.o)
+ .eh_frame      0x1001de40        0x4 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v7e-m+fp/softfp/crtend.o
+                0x1001de44                        _etext = .
 
-.glue_7         0x1001ddf4        0x0
- .glue_7        0x1001ddf4        0x0 linker stubs
+.glue_7         0x1001de44        0x0
+ .glue_7        0x1001de44        0x0 linker stubs
 
-.glue_7t        0x1001ddf4        0x0
- .glue_7t       0x1001ddf4        0x0 linker stubs
+.glue_7t        0x1001de44        0x0
+ .glue_7t       0x1001de44        0x0 linker stubs
 
-.vfp11_veneer   0x1001ddf4        0x0
- .vfp11_veneer  0x1001ddf4        0x0 linker stubs
+.vfp11_veneer   0x1001de44        0x0
+ .vfp11_veneer  0x1001de44        0x0 linker stubs
 
-.v4_bx          0x1001ddf4        0x0
- .v4_bx         0x1001ddf4        0x0 linker stubs
+.v4_bx          0x1001de44        0x0
+ .v4_bx         0x1001de44        0x0 linker stubs
 
-.iplt           0x1001ddf4        0x0
- .iplt          0x1001ddf4        0x0 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v7e-m+fp/softfp/crtbegin.o
+.iplt           0x1001de44        0x0
+ .iplt          0x1001de44        0x0 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v7e-m+fp/softfp/crtbegin.o
 
-.bin_storage    0x1001ddf4        0x0
+.bin_storage    0x1001de44        0x0
  FILL mask 0xff
-                0x1001ddf4                        _bin_start_ = .
+                0x1001de44                        _bin_start_ = .
  *(.bin_storage_img)
-                0x1001ddf4                        _bin_end_ = .
-                0x1001ddf4                        . = ALIGN (0x4)
+                0x1001de44                        _bin_end_ = .
+                0x1001de44                        . = ALIGN (0x4)
 
 .rom_code       0x00000000        0x0
                 0x00000000                        . = ALIGN (0x10)
@@ -15648,9 +15649,9 @@ LOAD /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/
  *(.rom_code_section)
                 0x20000000                        _esran_code = .
 
-.flash_code     0x1001ddf4        0xc
-                0x1001de00                        . = ALIGN (0x10)
- *fill*         0x1001ddf4        0xc 
+.flash_code     0x1001de44        0xc
+                0x1001de50                        . = ALIGN (0x10)
+ *fill*         0x1001de44        0xc 
                 0x20000000                        _sran_code = .
  *(.flash_code_section)
                 0x20000000                        _esran_code = .
@@ -15661,23 +15662,23 @@ LOAD /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/
  *(.sram_code_section)
                 0x20000000                        _esran_code = .
 
-.ARM.exidx      0x1001de00        0x8
-                0x1001de00                        __exidx_start = .
+.ARM.exidx      0x1001de50        0x8
+                0x1001de50                        __exidx_start = .
  *(.ARM.exidx*)
- .ARM.exidx     0x1001de00        0x8 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-memchr.o)
- .ARM.exidx     0x1001de08        0x0 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-memcpy.o)
+ .ARM.exidx     0x1001de50        0x8 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-memchr.o)
+ .ARM.exidx     0x1001de58        0x0 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-memcpy.o)
                                   0x8 (size before relaxing)
- .ARM.exidx     0x1001de08        0x0 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-strlen.o)
+ .ARM.exidx     0x1001de58        0x0 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/softfp/libc.a(libc_a-strlen.o)
                                   0x8 (size before relaxing)
  .ARM.exidx.text.__udivmoddi4
-                0x1001de08        0x0 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v7e-m+fp/softfp/libgcc.a(_udivmoddi4.o)
+                0x1001de58        0x0 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v7e-m+fp/softfp/libgcc.a(_udivmoddi4.o)
                                   0x8 (size before relaxing)
-                0x1001de08                        __exidx_end = .
+                0x1001de58                        __exidx_end = .
 
-.rel.dyn        0x1001de08        0x0
- .rel.iplt      0x1001de08        0x0 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v7e-m+fp/softfp/crtbegin.o
+.rel.dyn        0x1001de58        0x0
+ .rel.iplt      0x1001de58        0x0 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v7e-m+fp/softfp/crtbegin.o
 
-.data           0x20000000      0x708 load address 0x1001de08
+.data           0x20000000      0x708 load address 0x1001de58
                 0x20000000                        _data = ALIGN (., 0x4)
  *(.data*)
  .data.KEY_SHARE
@@ -15738,19 +15739,19 @@ LOAD /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/
  .fini_array    0x20000704        0x4 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v7e-m+fp/softfp/crtbegin.o
                 0x20000708                        PROVIDE (__fini_array_end = .)
                 0x20000708                        _edata = ALIGN (., 0x4)
-                0x1001de08                        __load_data = LOADADDR (.data)
+                0x1001de58                        __load_data = LOADADDR (.data)
 
 .tm_clone_table
-                0x20000708        0x0 load address 0x1001e510
+                0x20000708        0x0 load address 0x1001e560
  .tm_clone_table
                 0x20000708        0x0 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v7e-m+fp/softfp/crtbegin.o
  .tm_clone_table
                 0x20000708        0x0 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v7e-m+fp/softfp/crtend.o
 
-.igot.plt       0x20000708        0x0 load address 0x1001e510
+.igot.plt       0x20000708        0x0 load address 0x1001e560
  .igot.plt      0x20000708        0x0 /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v7e-m+fp/softfp/crtbegin.o
 
-.bss            0x20000800     0x1150 load address 0x1001e510
+.bss            0x20000800     0x1150 load address 0x1001e560
                 0x20000800                        . = ALIGN (0x4)
                 0x20000800                        _bss = .
  *(.bss*)
@@ -15870,7 +15871,7 @@ LOAD /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/
  *(COMMON)
                 0x20001950                        _ebss = ALIGN (., 0x4)
 
-.shared         0x20001950        0x4 load address 0x1001e510
+.shared         0x20001950        0x4 load address 0x1001e560
                 0x20001950                        . = ALIGN (0x4)
                 0x20001950                        _shared = .
  *(.mailbox*)
@@ -15879,15 +15880,15 @@ LOAD /nix/store/shci5ykbsfws7kcxpqnn2qqxfw761haw-gcc-arm-embedded-12.3.rel1/bin/
  .shared        0x20001950        0x4 /Pace-2024-ectf/component/build/system_max78000.o
                 0x20001950                SystemCoreClock
                 0x20001954                        _eshared = ALIGN (., 0x4)
-                0x1001e510                        __shared_data = LOADADDR (.shared)
+                0x1001e560                        __shared_data = LOADADDR (.shared)
                 0x20020000                        __StackTop = (ORIGIN (SRAM) + LENGTH (SRAM))
                 0x2001f000                        __StackLimit = (__StackTop - SIZEOF (.stack_dummy))
 
-.stack_dummy    0x20001958     0x1000 load address 0x1001e514
+.stack_dummy    0x20001958     0x1000 load address 0x1001e564
  *(.stack*)
  .stack         0x20001958     0x1000 /Pace-2024-ectf/component/build/startup_firmware.o
 
-.heap           0x20001958      0xc00 load address 0x1001e514
+.heap           0x20001958      0xc00 load address 0x1001e564
                 0x20001958                        . = ALIGN (0x4)
  *(.heap*)
  .heap          0x20001958      0xc00 /Pace-2024-ectf/component/build/startup_firmware.o

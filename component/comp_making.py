@@ -154,9 +154,9 @@ def write_key_to_files(index)->None:
     """
     index = int(index)
     key_share = secrets.token_bytes(16)
-    if file_exist(Path(f"../deployment/cc.csv")):
-        mask = get_secret_key_from_csv(Path(f"../deployment/cc.csv"), index*2)
-        final = get_secret_key_from_csv(Path(f"../deployment/cc.csv"), index*2+1)
+    if file_exist(Path(f"../deployment/pace.csv")):
+        mask = get_secret_key_from_csv(Path(f"../deployment/pace.csv"), index*2)
+        final = get_secret_key_from_csv(Path(f"../deployment/pace.csv"), index*2+1)
     else:
         print("No file found")
         print("error")
@@ -186,7 +186,7 @@ def write_key_to_files(index)->None:
 
 
 def get_nums():
-    file_path = Path("../comp_count.txt")
+    file_path = Path("../comp.txt")
     if not os.path.exists(file_path):
         # If the file doesn't exist, create it and write "1"
         with open(file_path, "w") as f:

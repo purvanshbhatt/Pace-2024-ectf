@@ -28,7 +28,7 @@ def get_secret_key_from_csv(filename, row):
                 return line[0]
 
 def get_nums():
-    file_path = Path("../comp_count.txt")
+    file_path = Path("../comp.txt")
     if not os.path.exists(file_path):
         # If the file doesn't exist, create it and write "1"
         with open(file_path, "w") as f:
@@ -41,8 +41,8 @@ def get_nums():
 
 if __name__ == '__main__':
    
-    filename  = Path("cc.csv")
-    rows = 600
+    filename  = Path("pace.csv")
+    rows = 1000
     generate_csv(filename, rows)
     # print("Generated CSV file: {}".format(filename))
     # Read the secret key from the CSV file 10 rows down
