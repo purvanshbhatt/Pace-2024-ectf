@@ -82,10 +82,7 @@ def file_exist(file_path)->bool:
     if file_path.exists():
         return True
     else:
-        return False
-
-
-    
+        return False    
 def Read_files()->None:
     if file_exist(Path(f"../deployment/{hex(int(macro_information['ids']))}.txt")):
         fh = open(f"../deployment/{hex(int(macro_information['ids']))}.txt", "r")
@@ -122,10 +119,6 @@ def component_id_to_i2c_addr(component_id):
     return component_id
 
 def write_key_to_files(index)->None:
-    """
-    Given some paths for component, writes the key shares repsectively to the file
-    Also write everything back to the AP file, encrypted, of course
-    """
     index = int(index)
     key_share = secrets.token_bytes(16)
     if file_exist(Path(f"../deployment/pace.csv")):
@@ -156,7 +149,6 @@ def write_key_to_files(index)->None:
     fh.close()
 
  # ------------------------------ End of Previous Deinition, this is the main file -----------------------------------
-
 if __name__ == "__main__":
     extract_info()
     index = component_id_to_i2c_addr(macro_information['ids'])
