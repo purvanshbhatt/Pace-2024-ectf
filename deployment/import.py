@@ -25,7 +25,13 @@ def getkey(filename, row):
                 print("Secret key: {}".format(line[0]))
                 return line[0]
 
-
+def get_nums():
+    file_path = Path("../component/count.txt")
+    if not os.path.exists(file_path):
+        with open(file_path, "w") as f:
+            pass
+        
+        return 1
     
 if __name__ == '__main__':
    
