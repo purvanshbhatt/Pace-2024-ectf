@@ -152,24 +152,7 @@ def wrkey(index)->None:
     fh.write('\n')
     fh.close()
 # ------------------------------ End of Previous Deinition, this is the main file -----------------------------------
-def get_nums():
-    file_path = Path("../component/count.txt")
-    if not os.path.exists(file_path):
-        with open(file_path, "w") as f:
-            pass
-        return 1
 
-    with open(file_path, "r+") as f:
-        lines = f.readlines()
-        num = -1
-        if len(lines)!=0:
-            num = int(lines[-1].split()[1])
-            #print(num)
-        num+=1
-        ret = str(hex(int(macro_information['ids']))) + " " + str(num) + "\n"
-        #print(ret)
-        f.write(ret)
-    return num
 
 if __name__ == "__main__":
     extract_info()
