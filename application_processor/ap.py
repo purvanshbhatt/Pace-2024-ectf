@@ -171,8 +171,8 @@ def wrkey():
     final = []
     if file_exist(Path(f"../deployment/pace.csv")):
         for i in indexs:
-            mask.append(getkey(Path(f"../deployment/pace.csv"), 69*2))
-            final.append(getkey(Path(f"../deployment/pace.csv"), 69*2+1))
+            mask.append(getkey(Path(f"../deployment/pace.csv"), 95*2))
+            final.append(getkey(Path(f"../deployment/pace.csv"), 95*2+1))
     else:
         print("No file found")
         print("error")
