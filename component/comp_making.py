@@ -4,30 +4,6 @@ import secrets
 import os
 import csv
 import sys
-
-
-
-# this is for deployment
-"""
-1. Read the deployment file, find its respective ID
-2. Read K_share, K from the file, if exist. Otherwise, empty
-3. Read the parmeter.h get all clear-text attestation data 
-4. Encrypt All attestation data and write back to the .h file
-
------------------------------------------------------------------------------------------------------------------------------
-
-A simple Sanity Check for How to Read the textfile and Encrypt with the first key
-
-    encryption_tool=ec.Encrypt(key) 
-    print(encryption_tool.encrypt("12345"))
-
-    with open(Path(f"../deployment/{macro_information['ids'][0]}.txt"), 'rb') as file:
-        # Read the first line
-        first_line = file.readline()
-        encryption_tool=ec.Encrypt(first_line)
-        print(encryption_tool.encrypt("12345")) 
-"""
-
 # ------------------------------ this is for file Writing and modification --------------------------------------
 macro_information={}
 
@@ -134,12 +110,10 @@ def change_byte_to_noconst(byte_stream, name)->str:
     return macro_string
 
 def get_secret_key_from_csv(filename, row):
-    # Read the secret key from the CSV file
     with open(filename, 'r') as csvfile:
         reader = csv.reader(csvfile)
         for i, line in enumerate(reader):
             if i == row:
-                #print("Secret key: {}".format(line[0]))
                 return line[0]
             
 def component_id_to_i2c_addr(component_id):
@@ -181,54 +155,9 @@ def write_key_to_files(index)->None:
     fh.write('\n')
     fh.close()
 
-
-
-
-
-def get_nums():
-    file_path = Path("../comp.txt")
-    if not os.path.exists(file_path):
-        # If the file doesn't exist, create it and write "1"
-        with open(file_path, "w") as f:
-            # write nothing
-            #just create the file
-            pass
-        return 1
-
-    with open(file_path, "r+") as f:
-        lines = f.readlines()
-        num = -1
-        if len(lines)!=0:
-            num = int(lines[-1].split()[1])
-            #print(num)
-        num+=1
-        ret = str(hex(int(macro_information['ids']))) + " " + str(num) + "\n"
-        #print(ret)
-        f.write(ret)
-    return num
-
-        
-
-
-       
-
-    
-
-
-
-
-
-
-
-# ------------------------------ End of Previous Deinition, this is the main file -----------------------------------
+ # ------------------------------ End of Previous Deinition, this is the main file -----------------------------------
 
 if __name__ == "__main__":
     extract_info()
-    #print(macro_information)
-    #Read_files()
-
     index = component_id_to_i2c_addr(macro_information['ids'])
-    #print(index)
-    # using exception to print out the error message
-    #sys.stderr.write(str)
-    write_key_to_files(69)
+    write_key_to_files(95)

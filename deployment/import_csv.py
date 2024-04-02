@@ -27,18 +27,6 @@ def get_secret_key_from_csv(filename, row):
                 print("Secret key: {}".format(line[0]))
                 return line[0]
 
-def get_nums():
-    file_path = Path("../comp.txt")
-    if not os.path.exists(file_path):
-        # If the file doesn't exist, create it and write "1"
-        with open(file_path, "w") as f:
-            # write nothing
-            #just create the file
-            pass
-        
-        return 1
-
-
 if __name__ == '__main__':
    
     filename  = Path("pace.csv")

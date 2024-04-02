@@ -60,8 +60,7 @@ uint8_t RAND_Y[RAND_Z_SIZE];
 // AES Macros
 #define AES_SIZE 16 // 16 bytes
 
-uint8_t synthesized = 0; // when you initiate any command from the host machine, check if the
-                         // thing is synthesized yet or not, if not, synthesize the whole thing.
+uint8_t synthesized = 0;
 uint8_t GLOBAL_KEY[AES_SIZE];
 uint8_t receive_buffer[MAX_I2C_MESSAGE_LEN];
 uint8_t transmit_buffer[MAX_I2C_MESSAGE_LEN];
@@ -119,7 +118,6 @@ void uint32_to_uint8(uint8_t str_uint8[4], uint32_t str_uint32) {
     for (int i = 0; i < 4; i++)
         str_uint8[i] = (uint8_t)(str_uint32 >> 8 * (3 - i)) & 0xFF;
 }
-
 
 void uint8_to_uint32(uint8_t str_uint8[4], uint32_t* str_uint32) {
     *str_uint32 = 0; // Initialize to zero
@@ -307,8 +305,6 @@ int get_provisioned_ids(uint32_t *buffer) {
     return flash_status.component_cnt;
 }
 
-// Initialize the device
-// This must be called on startup to initialize the flash and i2c interfaces
 void init() {
 
     // Enable global interrupts
