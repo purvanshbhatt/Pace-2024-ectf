@@ -124,7 +124,11 @@ options:
 
 **Example Utilization**
 ```bash
+<<<<<<< HEAD
 ectf_build_ap -d . -on ap --p 123456 -c 2 -ids "0x11111124, 0x11111125" -b "Test boot message" -t 0123456789abcdef -od build
+=======
+ectf_build_ap -d . -on ap --p 123456 -c 2 -ids "0x99887720, 0x99887721" -b "Test boot message" -t 0123456789abcdef -od build
+>>>>>>> refs/remotes/origin/main
 ```
 
 ### Building the Component
@@ -156,10 +160,6 @@ options:
 ```
 
 **Example Utilization**
-```bash
-ectf_build_comp -d . -on comp -od build -id 0x11111125 -b "Component boot" -al "McLean" -ad "08/08/08" -ac "Fritz"
-```
-
 ## Flashing
 Flashing the MAX78000 is done through the eCTF Bootloader. You will need to initially flash the eCTF Bootloader onto the provided hardware. 
 This can be done easily by dragging and dropping the [provided bootloader](https://ectfmitre.gitlab.io/ectf-website/2024/components/bootloader.html) (for design phase:`insecure.bin`) to the DAPLink interface. DAPLink will show up as an external drive when connected to your system. Succesfull installation would make a blue LED flash on the board.
@@ -176,7 +176,7 @@ optional arguments:
 
 **Example Utilization**
 ```bash
-ectf_update --infile example_fw/build/firmware.img --port /dev/ttyUSB0
+ectf_update --infile example_fw/build/firmware.img --port /dev/ttyACM0
 ```
 
 ## Host Tools
@@ -198,7 +198,7 @@ options:
 
 **Example Utilization**
 ``` bash
-ectf_list -a /dev/ttyUSB0
+ectf_list -a /dev/ttyACM0
 ```
 
 ### Boot Tool
@@ -218,7 +218,7 @@ options:
 
 **Example Utilization**
 ``` bash
-ectf_boot -a /dev/ttyUSB0
+ectf_boot -a /dev/ttyACM0
 ```
 
 ### Replace Tool
@@ -245,7 +245,7 @@ options:
 
 **Example Utilization**
 ``` bash
-ectf_replace -a /dev/ttyUSB0 -t 0123456789abcdef -i 0x11111126 -o 0x11111125
+ectf_replace -a /dev/ttyACM0 -t 0123456789abcdef -i 0x99887720 -o 0x99887721
 ```
 
 ### Attestation Tool
@@ -269,5 +269,5 @@ options:
 
 **Example Utilization**
 ```
-ectf_attestation -a /dev/ttyUSB0 -p 123456 -c 0x11111124
+ectf_attestation -a /dev/ttyACM0 -p 123456 -c 0x99887720
 ```

@@ -27,9 +27,8 @@
 #include "Rand_lib.h"
 #include "aes.h"
 
-#include "board_link.h"
-#include "host_messaging.h"
-#include "key_exchange.h"
+
+
 
 // Includes from containerized build
 #include "disable_cache.h"
@@ -241,11 +240,6 @@ int secure_receive(i2c_addr_t address, uint8_t *buffer) {
         return ERROR_RETURN;
     }
 
-    message* challenge = (message*)challenge_buffer;
-    // compare cmd code
-    if (challenge->opcode != COMPONENT_CMD_POSTBOOT_VALIDATE) {
-        print_error("Invalid command in challenge message from component during post boot");
-        return ERROR_RETURN;
     }
 
     message* answer = (message*)answer_buffer;
@@ -796,31 +790,7 @@ int main() {
             continue;
         } 
 
-        if (synthesized == 0 ) {
-            if(preboot_validate_component_id() == SUCCESS_RETURN){
-                for(int i = 0; i < 16; ++i){
-                    transmit_buffer[4 * i + 0] = 'D';
-                    transmit_buffer[4 * i + 1] = 'E';
-                    transmit_buffer[4 * i + 2] = 'A';
-                    transmit_buffer[4 * i + 3] = 'D';
-                }
-                send_packet(component_id_to_i2c_addr(flash_status.component_ids[0]), MAX_I2C_MESSAGE_LEN-1, transmit_buffer);
-                send_packet(component_id_to_i2c_addr(flash_status.component_ids[1]), MAX_I2C_MESSAGE_LEN-1, transmit_buffer);
-                if(key_sync(GLOBAL_KEY, flash_status.component_cnt,
-                        flash_status.component_ids[0],
-                        flash_status.component_ids[1]) == SUCCESS_RETURN){
-                    synthesized = 1;
-                }
-                else{
-                    print_info("Synthesize the keys failed\n");
-                }
-            }
 
-
-            // memset(CP_KEY1, 0, 17);
-            // memset(CP_KEY2, 0, 17);
-            // poll_and_receive_packet(component_id_to_i2c_addr(flash_status.component_ids[0]), CP_KEY1);
-            // poll_and_receive_packet(component_id_to_i2c_addr(flash_status.component_ids[1]), CP_KEY2);
         }
 
         // Shouldn't the merging happen here?
