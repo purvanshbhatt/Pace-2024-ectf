@@ -1,6 +1,6 @@
 # eCTF MISC System - Pace University
 
-This repository houses the design of a secure eCTF MISC system for the 2024 competition.
+This repository houses the design of a secure eCTF MISC system for the 2024 competition developed by Team PACE.
 
 ## Key Features
 
