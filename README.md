@@ -35,7 +35,7 @@ Written in Python, these tools can be installed using Poetry (poetry install).
 
 ### Development and Deployment
 
-Refer to the "eCTF Design Document" and the codebase itself for in-depth guidance on system architecture, security features, and the deployment process.
+Refer to the Document and the codebase itself for in-depth guidance on system architecture, security features, and the deployment process.
 
 ## Documentation
 
