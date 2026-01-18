@@ -119,9 +119,61 @@ int decrypt_sym(uint8_t *ciphertext, size_t len, uint8_t *key, uint8_t *plaintex
  *
  * @return 0 on success, non-zero for other error
  */
-int hash(const byte *data, size_t len, uint8_t *hash_out) {
-    // Pass values to hash
-    return wc_Sha3_256Hash(data, len, hash_out);
+int hash(const uint8_t *data, size_t len, uint8_t *hash_out) {
+    return wc_Sha256Hash(data, len, hash_out);
+}
+
+int hash_sha256(const uint8_t *data, size_t len, uint8_t *hash_out) {
+    return wc_Sha256Hash(data, len, hash_out);
+}
+
+int hkdf_sha256(const uint8_t *salt, size_t salt_len, const uint8_t *ikm,
+                size_t ikm_len, const uint8_t *info, size_t info_len,
+                uint8_t *okm, size_t okm_len) {
+    return wc_HKDF(SHA256, ikm, (word32)ikm_len, salt, (word32)salt_len,
+                   info, (word32)info_len, okm, (word32)okm_len);
+}
+
+int aead_encrypt_gcm(const uint8_t *key, const uint8_t *nonce, size_t nonce_len,
+                     const uint8_t *aad, size_t aad_len, const uint8_t *plaintext,
+                     size_t plaintext_len, uint8_t *ciphertext, uint8_t *tag,
+                     size_t tag_len) {
+    Aes aes;
+    int ret = wc_AesInit(&aes, NULL, INVALID_DEVID);
+    if (ret != 0) {
+        return ret;
+    }
+    ret = wc_AesGcmSetKey(&aes, key, KEY_SIZE);
+    if (ret != 0) {
+        wc_AesFree(&aes);
+        return ret;
+    }
+    ret = wc_AesGcmEncrypt(&aes, ciphertext, plaintext, (word32)plaintext_len,
+                           nonce, (word32)nonce_len, tag, (word32)tag_len,
+                           aad, (word32)aad_len);
+    wc_AesFree(&aes);
+    return ret;
+}
+
+int aead_decrypt_gcm(const uint8_t *key, const uint8_t *nonce, size_t nonce_len,
+                     const uint8_t *aad, size_t aad_len, const uint8_t *ciphertext,
+                     size_t ciphertext_len, const uint8_t *tag, size_t tag_len,
+                     uint8_t *plaintext) {
+    Aes aes;
+    int ret = wc_AesInit(&aes, NULL, INVALID_DEVID);
+    if (ret != 0) {
+        return ret;
+    }
+    ret = wc_AesGcmSetKey(&aes, key, KEY_SIZE);
+    if (ret != 0) {
+        wc_AesFree(&aes);
+        return ret;
+    }
+    ret = wc_AesGcmDecrypt(&aes, plaintext, ciphertext, (word32)ciphertext_len,
+                           nonce, (word32)nonce_len, tag, (word32)tag_len,
+                           aad, (word32)aad_len);
+    wc_AesFree(&aes);
+    return ret;
 }
 
 /**
@@ -227,7 +279,6 @@ int import_pub_key(const byte* pubkey_buf, word32 len, ecc_key* key)
 
 
 /** @brief Cryptographically signs an encrypted ciphertext 
->>>>>>> 9611ac90ecac26a6733720f235dec332c37fe9a0
  * 		   uses WolfSSL's WolfCrypt library for Hashing/Signing
  * 		   and MAX78000fthr's on board hardware for RNG
  *
@@ -286,7 +337,7 @@ int asym_validate(const byte *signature, word32 sig_len, const byte *ciphertext,
 	uint8_t digest[HASH_SIZE];
 
 	//Hash the encrypted command
-	hash(ciphertext ,BLOCK_SIZE, digest);
+    hash(ciphertext ,BLOCK_SIZE, digest);
 
     //Validate Signature
     int valid = wc_ecc_verify_hash(signature, sig_len, digest, HASH_SIZE, status, key);

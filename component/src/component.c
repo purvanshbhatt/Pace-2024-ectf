@@ -26,6 +26,9 @@
 
 // Includes from containerized build
 #include "ectf_params.h"
+#include "component_secrets.h"
+#include "ectf_protocol.h"
+#include "simple_crypto.h"
 
 // Include cache disable
 #include "Rand_lib.h"
@@ -58,7 +61,18 @@ uint8_t RAND_Y[RAND_Y_SIZE];
 uint8_t RAND_Z[RAND_Z_SIZE];
 uint8_t GLOBAL_KEY[AES_SIZE];
 
-uint8_t synthesized = 0;
+#define SESSION_KEY_LEN 16
+#define ECTF_MAX_PAYLOAD (MAX_I2C_MESSAGE_LEN - (int)sizeof(ectf_msg_header_t) - ECTF_TAG_LEN)
+
+typedef struct {
+    uint8_t valid;
+    uint8_t key[SESSION_KEY_LEN];
+    uint32_t tx_counter;
+    uint32_t rx_counter;
+    uint8_t nonce_a[ECTF_NONCE_DATA_LEN];
+} session_state_t;
+
+static session_state_t session_state;
 
 /******************************** TYPE DEFINITIONS
  * ********************************/
@@ -136,6 +150,117 @@ int random_checker(uint8_t target[RAND_Z_SIZE], uint8_t control[RAND_Z_SIZE]) {
         }
     }
     return 1;
+}
+
+static void build_nonce(uint32_t counter, uint32_t component_id, uint8_t direction,
+                        uint8_t nonce[ECTF_NONCE_LEN]) {
+    nonce[0] = (uint8_t)(counter >> 24);
+    nonce[1] = (uint8_t)(counter >> 16);
+    nonce[2] = (uint8_t)(counter >> 8);
+    nonce[3] = (uint8_t)(counter);
+    nonce[4] = (uint8_t)(component_id >> 24);
+    nonce[5] = (uint8_t)(component_id >> 16);
+    nonce[6] = (uint8_t)(component_id >> 8);
+    nonce[7] = (uint8_t)(component_id);
+    nonce[8] = direction;
+    nonce[9] = 0;
+    nonce[10] = 0;
+    nonce[11] = 0;
+}
+
+static int send_secure_message(uint8_t msg_type, uint32_t counter,
+                               const uint8_t *key, uint8_t direction,
+                               const uint8_t *payload, uint16_t payload_len) {
+    if (payload_len > ECTF_MAX_PAYLOAD) {
+        return ERROR_RETURN;
+    }
+
+    ectf_msg_header_t header;
+    header.magic = ECTF_MSG_MAGIC;
+    header.version = ECTF_MSG_VERSION;
+    header.msg_type = msg_type;
+    header.component_id = COMPONENT_ID;
+    header.counter = counter;
+    header.payload_len = payload_len;
+
+    uint8_t nonce[ECTF_NONCE_LEN];
+    build_nonce(counter, COMPONENT_ID, direction, nonce);
+
+    uint8_t buffer[MAX_I2C_MESSAGE_LEN];
+    memcpy(buffer, &header, sizeof(header));
+
+    int ret = aead_encrypt_gcm(key, nonce, sizeof(nonce), (uint8_t *)&header,
+                               sizeof(header), payload, payload_len,
+                               buffer + sizeof(header),
+                               buffer + sizeof(header) + payload_len,
+                               ECTF_TAG_LEN);
+    if (ret != 0) {
+        return ERROR_RETURN;
+    }
+
+    uint8_t total_len = (uint8_t)(sizeof(header) + payload_len + ECTF_TAG_LEN);
+    send_packet_and_ack(total_len, buffer);
+    return SUCCESS_RETURN;
+}
+
+static int receive_secure_message(uint8_t direction, const uint8_t *key,
+                                  ectf_msg_header_t *header, uint8_t *payload,
+                                  uint16_t *payload_len) {
+    uint8_t buffer[MAX_I2C_MESSAGE_LEN];
+    int len = wait_and_receive_packet(buffer);
+    if (len <= 0) {
+        return ERROR_RETURN;
+    }
+    if (len < (int)(sizeof(ectf_msg_header_t) + ECTF_TAG_LEN)) {
+        return ERROR_RETURN;
+    }
+    memcpy(header, buffer, sizeof(*header));
+    if (header->magic != ECTF_MSG_MAGIC || header->version != ECTF_MSG_VERSION) {
+        return ERROR_RETURN;
+    }
+    if (header->component_id != COMPONENT_ID) {
+        return ERROR_RETURN;
+    }
+    if (header->payload_len > ECTF_MAX_PAYLOAD) {
+        return ERROR_RETURN;
+    }
+    if (len != (int)(sizeof(ectf_msg_header_t) + header->payload_len + ECTF_TAG_LEN)) {
+        return ERROR_RETURN;
+    }
+
+    uint8_t nonce[ECTF_NONCE_LEN];
+    build_nonce(header->counter, COMPONENT_ID, direction, nonce);
+    int ret = aead_decrypt_gcm(key, nonce, sizeof(nonce), (uint8_t *)header,
+                               sizeof(*header), buffer + sizeof(*header),
+                               header->payload_len,
+                               buffer + sizeof(*header) + header->payload_len,
+                               ECTF_TAG_LEN, payload);
+    if (ret != 0) {
+        return ERROR_RETURN;
+    }
+    *payload_len = header->payload_len;
+    return SUCCESS_RETURN;
+}
+
+static int derive_session_key(const uint8_t *nonce_a, const uint8_t *nonce_c,
+                              uint8_t *session_key) {
+    uint8_t info[ECTF_NONCE_DATA_LEN + ECTF_NONCE_DATA_LEN + 4 + 16];
+    size_t offset = 0;
+    memcpy(info + offset, nonce_a, ECTF_NONCE_DATA_LEN);
+    offset += ECTF_NONCE_DATA_LEN;
+    memcpy(info + offset, nonce_c, ECTF_NONCE_DATA_LEN);
+    offset += ECTF_NONCE_DATA_LEN;
+    info[offset++] = (uint8_t)(COMPONENT_ID >> 24);
+    info[offset++] = (uint8_t)(COMPONENT_ID >> 16);
+    info[offset++] = (uint8_t)(COMPONENT_ID >> 8);
+    info[offset++] = (uint8_t)(COMPONENT_ID);
+    memcpy(info + offset, COMPONENT_DEPLOYMENT_ID, 16);
+
+    if (hkdf_sha256(COMPONENT_DEPLOYMENT_ID, 16, COMPONENT_KC, SESSION_KEY_LEN,
+                    info, sizeof(info), session_key, SESSION_KEY_LEN) != 0) {
+        return ERROR_RETURN;
+    }
+    return SUCCESS_RETURN;
 }
 
 /******************************* POST BOOT FUNCTIONALITY
@@ -323,37 +448,105 @@ void boot() {
 
 // Handle a command from the AP
 void component_process_cmd() {
-    memset(receive_buffer, 0, MAX_I2C_MESSAGE_LEN);
-    uint8_t operation =  secure_wait_and_receive_packet(receive_buffer, GLOBAL_KEY);
-    if(operation == 1){
-        process_scan();
+    uint8_t buffer[MAX_I2C_MESSAGE_LEN];
+    int len = wait_and_receive_packet(buffer);
+    if (len <= 0) {
         return;
     }
-    else if(operation == 2 && synthesized == 0){
-        if(key_sync(GLOBAL_KEY) != -1){
-            synthesized = 1;
-        }
-        return;
-    }
-    else if(synthesized == 0){
-        printf("Key sync failed");
-        return;
-    }
-    message *command = (message *)receive_buffer;
 
-    // Output to application processor dependent on command received
-    switch (command->opcode) {
-    case COMPONENT_CMD_VALIDATE:
-        process_boot();
+    if (len < (int)(sizeof(ectf_msg_header_t) + ECTF_TAG_LEN)) {
+        return;
+    }
+
+    ectf_msg_header_t header;
+    memcpy(&header, buffer, sizeof(header));
+    if (header.magic != ECTF_MSG_MAGIC || header.version != ECTF_MSG_VERSION) {
+        return;
+    }
+    if (header.component_id != COMPONENT_ID) {
+        return;
+    }
+    if (header.payload_len > ECTF_MAX_PAYLOAD) {
+        return;
+    }
+    if (len != (int)(sizeof(header) + header.payload_len + ECTF_TAG_LEN)) {
+        return;
+    }
+
+    const uint8_t *key = NULL;
+    if (header.msg_type == ECTF_MSG_HELLO) {
+        key = COMPONENT_KC;
+    } else if (session_state.valid) {
+        key = session_state.key;
+    } else {
+        return;
+    }
+
+    uint8_t nonce[ECTF_NONCE_LEN];
+    build_nonce(header.counter, COMPONENT_ID, ECTF_DIR_AP_TO_COMP, nonce);
+
+    uint8_t payload[ECTF_MAX_PAYLOAD];
+    if (aead_decrypt_gcm(key, nonce, sizeof(nonce), (uint8_t *)&header,
+                         sizeof(header), buffer + sizeof(header),
+                         header.payload_len,
+                         buffer + sizeof(header) + header.payload_len,
+                         ECTF_TAG_LEN, payload) != 0) {
+        return;
+    }
+
+    if (header.msg_type == ECTF_MSG_HELLO) {
+        if (header.counter != 0 || header.payload_len != ECTF_NONCE_DATA_LEN) {
+            return;
+        }
+        memcpy(session_state.nonce_a, payload, ECTF_NONCE_DATA_LEN);
+        uint8_t nonce_c[ECTF_NONCE_DATA_LEN];
+        Rand_NASYC(nonce_c, ECTF_NONCE_DATA_LEN);
+        if (derive_session_key(session_state.nonce_a, nonce_c, session_state.key) != SUCCESS_RETURN) {
+            return;
+        }
+        session_state.valid = 1;
+        session_state.tx_counter = 0;
+        session_state.rx_counter = 0;
+        send_secure_message(ECTF_MSG_HELLO_RESP, 0, COMPONENT_KC,
+                            ECTF_DIR_COMP_TO_AP, nonce_c, ECTF_NONCE_DATA_LEN);
+        return;
+    }
+
+    if (!session_state.valid || header.counter <= session_state.rx_counter) {
+        return;
+    }
+    session_state.rx_counter = header.counter;
+
+    switch (header.msg_type) {
+    case ECTF_MSG_BOOT_REQ: {
+        char boot_msg[MAX_I2C_MESSAGE_LEN];
+        size_t msg_len = strlen(COMPONENT_BOOT_MSG);
+        if (msg_len > ECTF_MAX_PAYLOAD) {
+            return;
+        }
+        memcpy(boot_msg, COMPONENT_BOOT_MSG, msg_len);
+        session_state.tx_counter++;
+        send_secure_message(ECTF_MSG_BOOT_RESP, session_state.tx_counter,
+                            session_state.key, ECTF_DIR_COMP_TO_AP,
+                            (uint8_t *)boot_msg, (uint16_t)msg_len);
+        boot();
         break;
-    // case COMPONENT_CMD_SCAN:
-    //     process_scan();
-    //     break;
-    case COMPONENT_CMD_ATTEST:
-        process_attest();
+    }
+    case ECTF_MSG_ATTEST_REQ: {
+        char attest_msg[MAX_I2C_MESSAGE_LEN];
+        int msg_len = snprintf(attest_msg, sizeof(attest_msg),
+                               "LOC>%s\nDATE>%s\nCUST>%s\n", ATTESTATION_LOC,
+                               ATTESTATION_DATE, ATTESTATION_CUSTOMER);
+        if (msg_len < 0 || msg_len > ECTF_MAX_PAYLOAD) {
+            return;
+        }
+        session_state.tx_counter++;
+        send_secure_message(ECTF_MSG_ATTEST_RESP, session_state.tx_counter,
+                            session_state.key, ECTF_DIR_COMP_TO_AP,
+                            (uint8_t *)attest_msg, (uint16_t)msg_len);
         break;
+    }
     default:
-        printf("Error: Unrecognized command received %d\n", command->opcode);
         break;
     }
 }
@@ -435,21 +628,11 @@ int main(void) {
     // Initialize Component
     i2c_addr_t addr = component_id_to_i2c_addr(COMPONENT_ID);
     board_link_init(addr);
-    // memset(GLOBAL_KEY, 0, AES_SIZE);
-    Rand_NASYC(GLOBAL_KEY, AES_SIZE);
-    Rand_NASYC(KEY_SHARE, AES_SIZE);
-    synthesized = 0;
+    memset(&session_state, 0, sizeof(session_state));
 
     LED_On(LED2);
 
     while (1) {
-        // if (synthesized == 0) {
-
-        //     key_sync(GLOBAL_KEY);
-        //     synthesized = 1;
-        //     // send_packet_and_ack(16, MASK);
-        //     // send_packet_and_ack(16, FINAL_MASK);
-        // }
         component_process_cmd();
     }
 }

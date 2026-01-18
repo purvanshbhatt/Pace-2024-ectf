@@ -33,6 +33,10 @@
 // Includes from containerized build
 #include "disable_cache.h"
 #include "ectf_params.h"
+#include "ap_secrets.h"
+#include "ectf_protocol.h"
+
+#include "simple_crypto.h"
 
 #include "simple_flash.h"
 
@@ -67,6 +71,23 @@ uint8_t synthesized = 0; // when you initiate any command from the host machine,
 uint8_t GLOBAL_KEY[AES_SIZE];
 uint8_t receive_buffer[MAX_I2C_MESSAGE_LEN];
 uint8_t transmit_buffer[MAX_I2C_MESSAGE_LEN];
+
+#define SESSION_KEY_LEN 16
+#define MAX_AP_SESSIONS COMPONENT_CNT
+
+typedef struct {
+    uint32_t component_id;
+    uint8_t valid;
+    uint8_t key[SESSION_KEY_LEN];
+    uint32_t tx_counter;
+    uint32_t rx_counter;
+    uint8_t nonce_a[ECTF_NONCE_DATA_LEN];
+    uint8_t nonce_c[ECTF_NONCE_DATA_LEN];
+} session_state_t;
+
+static session_state_t sessions[MAX_AP_SESSIONS];
+static uint8_t pin_failures = 0;
+static uint8_t token_failures = 0;
 
 /******************************** TYPE DEFINITIONS *********************************/
 // Data structure for sending commands to component
@@ -150,6 +171,205 @@ int random_checker(uint8_t target[RAND_Z_SIZE], uint8_t control[RAND_Z_SIZE]) {
         }
     }
     return 1;
+}
+
+#define ECTF_MAX_PAYLOAD (MAX_I2C_MESSAGE_LEN - (int)sizeof(ectf_msg_header_t) - ECTF_TAG_LEN)
+
+static int constant_time_equal(const uint8_t *a, const uint8_t *b, size_t len) {
+    uint8_t diff = 0;
+    for (size_t i = 0; i < len; i++) {
+        diff |= a[i] ^ b[i];
+    }
+    return diff == 0;
+}
+
+static void build_nonce(uint32_t counter, uint32_t component_id, uint8_t direction,
+                        uint8_t nonce[ECTF_NONCE_LEN]) {
+    nonce[0] = (uint8_t)(counter >> 24);
+    nonce[1] = (uint8_t)(counter >> 16);
+    nonce[2] = (uint8_t)(counter >> 8);
+    nonce[3] = (uint8_t)(counter);
+    nonce[4] = (uint8_t)(component_id >> 24);
+    nonce[5] = (uint8_t)(component_id >> 16);
+    nonce[6] = (uint8_t)(component_id >> 8);
+    nonce[7] = (uint8_t)(component_id);
+    nonce[8] = direction;
+    nonce[9] = 0;
+    nonce[10] = 0;
+    nonce[11] = 0;
+}
+
+static session_state_t *get_session(uint32_t component_id) {
+    for (unsigned i = 0; i < MAX_AP_SESSIONS; i++) {
+        if (sessions[i].component_id == component_id) {
+            return &sessions[i];
+        }
+    }
+    return NULL;
+}
+
+static session_state_t *get_or_create_session(uint32_t component_id) {
+    session_state_t *session = get_session(component_id);
+    if (session != NULL) {
+        return session;
+    }
+    for (unsigned i = 0; i < MAX_AP_SESSIONS; i++) {
+        if (sessions[i].component_id == 0) {
+            sessions[i].component_id = component_id;
+            sessions[i].valid = 0;
+            sessions[i].tx_counter = 0;
+            sessions[i].rx_counter = 0;
+            return &sessions[i];
+        }
+    }
+    return NULL;
+}
+
+static const uint8_t *find_component_kc(uint32_t component_id) {
+    for (unsigned i = 0; i < AP_COMPONENT_KEY_COUNT; i++) {
+        if (AP_COMPONENT_KEYS[i].component_id == component_id) {
+            return AP_COMPONENT_KEYS[i].kc;
+        }
+    }
+    return NULL;
+}
+
+static int send_secure_message(i2c_addr_t addr, uint32_t component_id,
+                               uint8_t msg_type, uint32_t counter,
+                               const uint8_t *key, uint8_t direction,
+                               const uint8_t *payload, uint16_t payload_len) {
+    if (payload_len > ECTF_MAX_PAYLOAD) {
+        return ERROR_RETURN;
+    }
+
+    ectf_msg_header_t header;
+    header.magic = ECTF_MSG_MAGIC;
+    header.version = ECTF_MSG_VERSION;
+    header.msg_type = msg_type;
+    header.component_id = component_id;
+    header.counter = counter;
+    header.payload_len = payload_len;
+
+    uint8_t nonce[ECTF_NONCE_LEN];
+    build_nonce(counter, component_id, direction, nonce);
+
+    uint8_t buffer[MAX_I2C_MESSAGE_LEN];
+    memcpy(buffer, &header, sizeof(header));
+
+    int ret = aead_encrypt_gcm(key, nonce, sizeof(nonce), (uint8_t *)&header,
+                               sizeof(header), payload, payload_len,
+                               buffer + sizeof(header),
+                               buffer + sizeof(header) + payload_len,
+                               ECTF_TAG_LEN);
+    if (ret != 0) {
+        return ERROR_RETURN;
+    }
+
+    uint8_t total_len = (uint8_t)(sizeof(header) + payload_len + ECTF_TAG_LEN);
+    return send_packet(addr, total_len, buffer);
+}
+
+static int receive_secure_message(i2c_addr_t addr, uint8_t direction,
+                                  const uint8_t *key, ectf_msg_header_t *header,
+                                  uint8_t *payload, uint16_t *payload_len) {
+    uint8_t buffer[MAX_I2C_MESSAGE_LEN];
+    int len = poll_and_receive_packet(addr, buffer);
+    if (len <= 0) {
+        return ERROR_RETURN;
+    }
+    if (len < (int)(sizeof(ectf_msg_header_t) + ECTF_TAG_LEN)) {
+        return ERROR_RETURN;
+    }
+
+    memcpy(header, buffer, sizeof(*header));
+    if (header->magic != ECTF_MSG_MAGIC || header->version != ECTF_MSG_VERSION) {
+        return ERROR_RETURN;
+    }
+    if (header->payload_len > ECTF_MAX_PAYLOAD) {
+        return ERROR_RETURN;
+    }
+
+    if (len != (int)(sizeof(ectf_msg_header_t) + header->payload_len + ECTF_TAG_LEN)) {
+        return ERROR_RETURN;
+    }
+
+    uint8_t nonce[ECTF_NONCE_LEN];
+    build_nonce(header->counter, header->component_id, direction, nonce);
+
+    int ret = aead_decrypt_gcm(key, nonce, sizeof(nonce), (uint8_t *)header,
+                               sizeof(*header), buffer + sizeof(*header),
+                               header->payload_len,
+                               buffer + sizeof(*header) + header->payload_len,
+                               ECTF_TAG_LEN, payload);
+    if (ret != 0) {
+        return ERROR_RETURN;
+    }
+
+    *payload_len = header->payload_len;
+    return SUCCESS_RETURN;
+}
+
+static int derive_session_key(const uint8_t *kc, const uint8_t *nonce_a,
+                              const uint8_t *nonce_c, uint32_t component_id,
+                              uint8_t *session_key) {
+    uint8_t info[ECTF_NONCE_DATA_LEN + ECTF_NONCE_DATA_LEN + 4 + 16];
+    size_t offset = 0;
+    memcpy(info + offset, nonce_a, ECTF_NONCE_DATA_LEN);
+    offset += ECTF_NONCE_DATA_LEN;
+    memcpy(info + offset, nonce_c, ECTF_NONCE_DATA_LEN);
+    offset += ECTF_NONCE_DATA_LEN;
+    info[offset++] = (uint8_t)(component_id >> 24);
+    info[offset++] = (uint8_t)(component_id >> 16);
+    info[offset++] = (uint8_t)(component_id >> 8);
+    info[offset++] = (uint8_t)(component_id);
+    memcpy(info + offset, AP_DEPLOYMENT_ID, 16);
+
+    if (hkdf_sha256(AP_DEPLOYMENT_ID, 16, kc, SESSION_KEY_LEN, info,
+                    sizeof(info), session_key, SESSION_KEY_LEN) != 0) {
+        return ERROR_RETURN;
+    }
+    return SUCCESS_RETURN;
+}
+
+static int establish_session(uint32_t component_id, session_state_t *session) {
+    const uint8_t *kc = find_component_kc(component_id);
+    if (kc == NULL) {
+        return ERROR_RETURN;
+    }
+
+    Rand_NASYC(session->nonce_a, ECTF_NONCE_DATA_LEN);
+
+    i2c_addr_t addr = component_id_to_i2c_addr(component_id);
+    int send_res = send_secure_message(addr, component_id, ECTF_MSG_HELLO, 0,
+                                       kc, ECTF_DIR_AP_TO_COMP,
+                                       session->nonce_a, ECTF_NONCE_DATA_LEN);
+    if (send_res < 0) {
+        return ERROR_RETURN;
+    }
+
+    ectf_msg_header_t header;
+    uint8_t payload[ECTF_MAX_PAYLOAD];
+    uint16_t payload_len = 0;
+    int recv_res = receive_secure_message(addr, ECTF_DIR_COMP_TO_AP, kc, &header,
+                                          payload, &payload_len);
+    if (recv_res != SUCCESS_RETURN) {
+        return ERROR_RETURN;
+    }
+    if (header.msg_type != ECTF_MSG_HELLO_RESP || header.counter != 0 ||
+        header.component_id != component_id || payload_len != ECTF_NONCE_DATA_LEN) {
+        return ERROR_RETURN;
+    }
+
+    memcpy(session->nonce_c, payload, ECTF_NONCE_DATA_LEN);
+    if (derive_session_key(kc, session->nonce_a, session->nonce_c, component_id,
+                           session->key) != SUCCESS_RETURN) {
+        return ERROR_RETURN;
+    }
+
+    session->valid = 1;
+    session->tx_counter = 0;
+    session->rx_counter = 0;
+    return SUCCESS_RETURN;
 }
 
 /******************************* POST BOOT FUNCTIONALITY *********************************/
@@ -240,8 +460,7 @@ int secure_receive(i2c_addr_t address, uint8_t *buffer) {
         return ERROR_RETURN;
     }
 
-    }
-
+    message* challenge = (message*)challenge_buffer;
     message* answer = (message*)answer_buffer;
 
     Rand_NASYC(RAND_Z, RAND_Z_SIZE);
@@ -377,237 +596,126 @@ int insecure_issue_cmd(i2c_addr_t addr, uint8_t *transmit, uint8_t *receive) {
 
 // We're assuming this doesn't need protection/modification
 int scan_components() {
-    // Print out provisioned component IDs
+    int found = 0;
     for (unsigned i = 0; i < flash_status.component_cnt; i++) {
-        print_info("P>0x%08x\n", flash_status.component_ids[i]);
-    }
+        uint32_t component_id = flash_status.component_ids[i];
+        print_info("P>0x%08x\n", component_id);
 
-    // Buffers for board link communication
-    uint8_t receive_buffer[MAX_I2C_MESSAGE_LEN];
-    uint8_t transmit_buffer[MAX_I2C_MESSAGE_LEN];
-
-    int check = 0;
-
-    // Scan scan command to each component
-    for (i2c_addr_t addr = 0x8; addr < 0x78; addr++) {
-        // I2C Blacklist:
-        // 0x18, 0x28, and 0x36 conflict with separate devices on MAX78000FTHR
-        if (addr == 0x18 || addr == 0x28 || addr == 0x36) {
+        session_state_t *session = get_or_create_session(component_id);
+        if (session == NULL) {
             continue;
         }
-
-        // Create command message
-        // message* command = (message*)transmit_buffer;
-
-        // command->opcode = COMPONENT_CMD_SCAN;
-        for(int i = 0; i < 16; ++i){
-            transmit_buffer[4 * i + 0] = 'B';
-            transmit_buffer[4 * i + 1] = 'E';
-            transmit_buffer[4 * i + 2] = 'E';
-            transmit_buffer[4 * i + 3] = 'F';
-        }
-
-        // Send out command and receive result
-        int len = insecure_issue_cmd(addr, transmit_buffer, receive_buffer);
-
-        // Success, device is present
-        if (len > 0) {
-            message* scan = (message*)receive_buffer;
-            uint32_t comp_id = 0;
-            for(int i = 0; i < 4; i++) {
-                comp_id = (comp_id << 8) | scan->comp_ID[i];
-            }
-            print_info("F>0x%08x\n", comp_id);
-            check += 1;
+        session->valid = 0;
+        if (establish_session(component_id, session) == SUCCESS_RETURN) {
+            print_info("F>0x%08x\n", component_id);
+            found++;
         }
     }
-    if(check == flash_status.component_cnt){
+
+    if (found == flash_status.component_cnt) {
         print_success("List\n");
         return SUCCESS_RETURN;
     }
-    else{
-        print_error("List\n");
-        return ERROR_RETURN;
-    }
-}
-
-int preboot_validate_component_id(){
-    uint8_t receive_buffer[MAX_I2C_MESSAGE_LEN];
-    uint8_t transmit_buffer[MAX_I2C_MESSAGE_LEN];
-
-    int check = 0;
-
-    // Scan scan command to each component
-    for (i2c_addr_t addr = 0x8; addr < 0x78; addr++) {
-        // I2C Blacklist:
-        // 0x18, 0x28, and 0x36 conflict with separate devices on MAX78000FTHR
-        if (addr == 0x18 || addr == 0x28 || addr == 0x36) {
-            continue;
-        }
-
-        // Create command message
-        // message* command = (message*)transmit_buffer;
-
-        // command->opcode = COMPONENT_CMD_SCAN;
-        for(int i = 0; i < 16; ++i){
-            transmit_buffer[4 * i + 0] = 'B';
-            transmit_buffer[4 * i + 1] = 'E';
-            transmit_buffer[4 * i + 2] = 'E';
-            transmit_buffer[4 * i + 3] = 'F';
-        }
-
-        // Send out command and receive result
-        int len = insecure_issue_cmd(addr, transmit_buffer, receive_buffer);
-
-        // Success, device is present
-        if (len > 0) {
-            message* scan = (message*)receive_buffer;
-            uint32_t comp_id = 0;
-            for(int i = 0; i < 4; i++) {
-                comp_id = (comp_id << 8) | scan->comp_ID[i];
-            }
-            for(int i = 0; i < flash_status.component_cnt; i++) {
-                if(flash_status.component_ids[i] == comp_id){
-                    check += 1;
-                    break;
-                }
-            }
-        }
-    }
-    if(check == flash_status.component_cnt){
-        //print_success("List\n");
-        return SUCCESS_RETURN;
-    }
-    else{
-        //print_error("List\n");
-        return ERROR_RETURN;
-    }
+    print_error("List\n");
+    return ERROR_RETURN;
 }
 
 int validate_and_boot_components() {
-    // Buffers for board link communication
-    uint8_t receive_buffer[MAX_I2C_MESSAGE_LEN];
-    uint8_t transmit_buffer[MAX_I2C_MESSAGE_LEN];
-
-    // If the two provisioned ids are not matched with exisiting ids, abort booting
-    if(preboot_validate_component_id() == ERROR_RETURN){
-        print_error("Component id doesn't matched\n");
-        return ERROR_RETURN;
-    }
-
-    // Send validate command to each component
     for (unsigned i = 0; i < flash_status.component_cnt; i++) {
-        // Set the I2C address of the component
         uint32_t component_id = flash_status.component_ids[i];
         i2c_addr_t addr = component_id_to_i2c_addr(component_id);
 
-        // Create Validate and boot message
-        message* command = (message*)transmit_buffer;
-
-        // opcode
-        command->opcode = COMPONENT_CMD_VALIDATE;
-
-        // comp_ID
-        uint32_to_uint8(command->comp_ID, component_id);
-
-        Rand_NASYC(RAND_Z, RAND_Z_SIZE);
-
-        // rand_z
-        uint8Arr_to_uint8Arr(command->rand_z, RAND_Z);
-
-        // Send out command and receive result
-        int len = issue_cmd(addr, transmit_buffer, receive_buffer);
-        if (len == ERROR_RETURN) {
-            // print_error("Could not validate or boot component:%d\n",i+1);
-            print_info("Could not validate or boot component:%08x\n",flash_status.component_ids[i]);
-            // continue;
-           return ERROR_RETURN;
-        }
-
-        message* response = (message* )receive_buffer;
-
-        // compare cmd code
-        if (response->opcode != COMPONENT_CMD_BOOT) {
-            print_error("Invalid command message from component");
+        session_state_t *session = get_or_create_session(component_id);
+        if (session == NULL ||
+            (session->valid == 0 && establish_session(component_id, session) != SUCCESS_RETURN)) {
+            print_error("Could not validate or boot component:%08x\n", component_id);
             return ERROR_RETURN;
         }
 
-        // compare cid
-        if (!uint8_uint32_cmp(response->comp_ID, component_id)) {
-            print_error("Component ID: 0x%08x invalid\n",
-                        flash_status.component_ids[i]);
+        session->tx_counter++;
+        if (send_secure_message(addr, component_id, ECTF_MSG_BOOT_REQ,
+                                session->tx_counter, session->key,
+                                ECTF_DIR_AP_TO_COMP, NULL, 0) < 0) {
+            print_error("Could not validate or boot component:%08x\n", component_id);
             return ERROR_RETURN;
-        }
-        else{
-            print_info("0x%08x>%s\n", flash_status.component_ids[i], response->remain);
         }
 
-        // compare Z value
-        int z_check = random_checker(response->rand_z, RAND_Z);
-        if (z_check != 1) {
-            print_error("Random number provided is invalid");
+        ectf_msg_header_t header;
+        uint8_t payload[ECTF_MAX_PAYLOAD + 1];
+        uint16_t payload_len = 0;
+        if (receive_secure_message(addr, ECTF_DIR_COMP_TO_AP, session->key,
+                                   &header, payload, &payload_len) != SUCCESS_RETURN) {
+            print_error("Could not validate or boot component:%08x\n", component_id);
             return ERROR_RETURN;
         }
+
+        if (header.msg_type != ECTF_MSG_BOOT_RESP || header.component_id != component_id) {
+            print_error("Invalid boot response from component\n");
+            return ERROR_RETURN;
+        }
+
+        if (header.counter <= session->rx_counter) {
+            print_error("Boot response replay detected\n");
+            return ERROR_RETURN;
+        }
+        session->rx_counter = header.counter;
+
+        payload[payload_len] = '\0';
+        print_info("0x%08x>%s\n", component_id, payload);
     }
     return SUCCESS_RETURN;
 }
 
 int attest_component(uint32_t component_id) {
-    int check = -1;
-    for(int i = 0; i < flash_status.component_cnt; ++i){
-        if(flash_status.component_ids[i] == component_id){
-            check = 0;
+    int provisioned = 0;
+    for (unsigned i = 0; i < flash_status.component_cnt; i++) {
+        if (flash_status.component_ids[i] == component_id) {
+            provisioned = 1;
             break;
         }
     }
-    if(check == -1){
+    if (!provisioned) {
         print_error("Could not attest\n");
         return ERROR_RETURN;
     }
-    // Buffers for board link communication
-    uint8_t receive_buffer[MAX_I2C_MESSAGE_LEN];
-    uint8_t transmit_buffer[MAX_I2C_MESSAGE_LEN];
 
-    // Set the I2C address of the component
+    session_state_t *session = get_or_create_session(component_id);
+    if (session == NULL ||
+        (session->valid == 0 && establish_session(component_id, session) != SUCCESS_RETURN)) {
+        print_error("Could not attest\n");
+        return ERROR_RETURN;
+    }
+
     i2c_addr_t addr = component_id_to_i2c_addr(component_id);
-
-    // Create Validate and boot message
-    message* command = (message*)transmit_buffer;
-
-    // op_code
-    command->opcode = COMPONENT_CMD_ATTEST;
-
-    // comp_ID
-    uint32_to_uint8(command->comp_ID, component_id);
-
-    Rand_NASYC(RAND_Z, RAND_Z_SIZE);
-
-    // rand_z
-    uint8Arr_to_uint8Arr(command->rand_z, RAND_Z);
-
-    // Send out command and receive result
-    int len = issue_cmd(addr, transmit_buffer, receive_buffer);
-    if (len == ERROR_RETURN) {
+    session->tx_counter++;
+    if (send_secure_message(addr, component_id, ECTF_MSG_ATTEST_REQ,
+                            session->tx_counter, session->key,
+                            ECTF_DIR_AP_TO_COMP, NULL, 0) < 0) {
         print_error("Could not attest\n");
         return ERROR_RETURN;
     }
 
-    // decrypt attestation data
-    message* response = (message*)receive_buffer;
-
-    // compare Z value
-    int z_check = random_checker(response->rand_z, RAND_Z);
-    if (z_check != 1) {
-        print_error("Random number provided is invalid");
+    ectf_msg_header_t header;
+    uint8_t payload[ECTF_MAX_PAYLOAD + 1];
+    uint16_t payload_len = 0;
+    if (receive_secure_message(addr, ECTF_DIR_COMP_TO_AP, session->key,
+                               &header, payload, &payload_len) != SUCCESS_RETURN) {
+        print_error("Could not attest\n");
         return ERROR_RETURN;
     }
-    // Print out attestation data
-    // TODO: it was originally right above the SUCCESS_RETURN, if you want
-    // these to keep below the for loop, we need to store the values from
-    // the receive_buffer - AJ
-    print_info("C>0x%08x\n", component_id);
-    print_info("%s", response->remain);
+    if (header.msg_type != ECTF_MSG_ATTEST_RESP || header.component_id != component_id) {
+        print_error("Could not attest\n");
+        return ERROR_RETURN;
+    }
+    if (header.counter <= session->rx_counter) {
+        print_error("Attestation response replay detected\n");
+        return ERROR_RETURN;
+    }
+    session->rx_counter = header.counter;
 
+    payload[payload_len] = '\0';
+    print_info("C>0x%08x\n", component_id);
+    print_info("%s", payload);
     return SUCCESS_RETURN;
 }
 
@@ -675,10 +783,25 @@ void boot() {
 int validate_pin() {
     char buf[50];
     recv_input("Enter pin: ", buf);
-    if (!strncmp(buf, AP_PIN, 6)) { // TODO: 1
+    uint8_t hash_out[HASH_SIZE];
+    size_t input_len = strnlen(buf, sizeof(buf));
+    uint8_t data[sizeof(AP_PIN_SALT) + sizeof(buf)];
+    memcpy(data, AP_PIN_SALT, sizeof(AP_PIN_SALT));
+    memcpy(data + sizeof(AP_PIN_SALT), buf, input_len);
+    hash_sha256(data, sizeof(AP_PIN_SALT) + input_len, hash_out);
+
+    if (constant_time_equal(hash_out, AP_PIN_HASH, HASH_SIZE)) {
+        pin_failures = 0;
         print_debug("Pin Accepted!\n");
         return SUCCESS_RETURN;
     }
+
+    pin_failures++;
+    uint32_t delay = 200000 * pin_failures;
+    if (delay > 2000000) {
+        delay = 2000000;
+    }
+    MXC_Delay(delay);
     print_error("Invalid PIN!\n");
     return ERROR_RETURN;
 }
@@ -687,10 +810,25 @@ int validate_pin() {
 int validate_token() {
     char buf[50];
     recv_input("Enter token: ", buf);
-    if (!strncmp(buf, AP_TOKEN, 16)) { // TODO: 2
+    uint8_t hash_out[HASH_SIZE];
+    size_t input_len = strnlen(buf, sizeof(buf));
+    uint8_t data[sizeof(AP_TOKEN_SALT) + sizeof(buf)];
+    memcpy(data, AP_TOKEN_SALT, sizeof(AP_TOKEN_SALT));
+    memcpy(data + sizeof(AP_TOKEN_SALT), buf, input_len);
+    hash_sha256(data, sizeof(AP_TOKEN_SALT) + input_len, hash_out);
+
+    if (constant_time_equal(hash_out, AP_TOKEN_HASH, HASH_SIZE)) {
+        token_failures = 0;
         print_debug("Token Accepted!\n");
         return SUCCESS_RETURN;
     }
+
+    token_failures++;
+    uint32_t delay = 200000 * token_failures;
+    if (delay > 2000000) {
+        delay = 2000000;
+    }
+    MXC_Delay(delay);
     print_error("Invalid Token!\n");
     return ERROR_RETURN;
 }
@@ -727,15 +865,32 @@ void attempt_replace() {
     recv_input("Component ID Out: ", buf);
     sscanf(buf, "%x", &component_id_out);
 
-    // Find the component to swap out
+    // Ensure replacement component is not already provisioned
+    for (unsigned i = 0; i < flash_status.component_cnt; i++) {
+        if (flash_status.component_ids[i] == component_id_in) {
+            print_error("Component 0x%08x already provisioned\r\n", component_id_in);
+            return;
+        }
+    }
+
+    session_state_t *new_session = get_or_create_session(component_id_in);
+    if (new_session == NULL || establish_session(component_id_in, new_session) != SUCCESS_RETURN) {
+        print_error("Replacement component failed authentication\r\n");
+        return;
+    }
+
     for (unsigned i = 0; i < flash_status.component_cnt; i++) {
         if (flash_status.component_ids[i] == component_id_out) {
             flash_status.component_ids[i] = component_id_in;
 
-            // write updated component_ids to flash
             flash_simple_erase_page(FLASH_ADDR);
             flash_simple_write(FLASH_ADDR, (uint32_t *)&flash_status,
                                sizeof(flash_entry));
+
+            session_state_t *old_session = get_session(component_id_out);
+            if (old_session != NULL) {
+                memset(old_session, 0, sizeof(session_state_t));
+            }
 
             print_debug("Replaced 0x%08x with 0x%08x\n", component_id_out,
                         component_id_in);
@@ -769,11 +924,7 @@ void attempt_attest() {
 int main() {
     // Initialize board
     init();
-    Rand_NASYC(RAND_Z, RAND_Z_SIZE);
-    // memset(GLOBAL_KEY, 0, AES_SIZE);
-    Rand_NASYC(GLOBAL_KEY, AES_SIZE);
-    Rand_NASYC(KEY_SHARE, AES_SIZE);
-    synthesized = 0;
+    memset(sessions, 0, sizeof(sessions));
 
     // Print the component IDs to be helpful
     // Your design does not need to do this
@@ -790,26 +941,14 @@ int main() {
             continue;
         } 
 
-
-        }
-
-        // Shouldn't the merging happen here?
-        //&& (strlen(buf) != 0
-
-        // Execute requested command
-        if( synthesized == 1){
-            if (!strcmp(buf, "boot")) { // TODO: 4
-                attempt_boot();
-            } else if (!strcmp(buf, "replace")) { // TODO: 5
-                attempt_replace();
-            } else if (!strcmp(buf, "attest")) { // TODO: 6
-                attempt_attest();
-            } else {
-                print_error("Unrecognized command '%s'\n", buf);
-            }
-        }
-        else{
-            print_info("Synthesize the keys first\n");
+        if (!strcmp(buf, "boot")) { // TODO: 4
+            attempt_boot();
+        } else if (!strcmp(buf, "replace")) { // TODO: 5
+            attempt_replace();
+        } else if (!strcmp(buf, "attest")) { // TODO: 6
+            attempt_attest();
+        } else {
+            print_error("Unrecognized command '%s'\n", buf);
         }
     }
 

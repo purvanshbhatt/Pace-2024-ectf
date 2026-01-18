@@ -124,11 +124,7 @@ options:
 
 **Example Utilization**
 ```bash
-<<<<<<< HEAD
 ectf_build_ap -d . -on ap --p 123456 -c 2 -ids "0x11111124, 0x11111125" -b "Test boot message" -t 0123456789abcdef -od build
-=======
-ectf_build_ap -d . -on ap --p 123456 -c 2 -ids "0x99887720, 0x99887721" -b "Test boot message" -t 0123456789abcdef -od build
->>>>>>> refs/remotes/origin/main
 ```
 
 ### Building the Component

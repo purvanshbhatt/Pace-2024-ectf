@@ -1,260 +1,119 @@
 from pathlib import Path
-import secrets
-import re, csv, os, sys
-
-# This is for Ap, Maintain and Tested by Jinyao on Jan 25
-"""
-1. Get pin, token, component ids, component count boot message
-2. Get the ids, create file in deployment folder 
-3. Encrypt using AES for Token 
-4. Encrypt using SHA256 for Pins 
-5. Write all the encrypted messages (Pin sha 256, Token AES)
-"""
+import hashlib
+import hmac
+import re
 
 
-# ------------------------------ This is for key generation ------------------------------
+def _read_file(path: Path) -> str:
+    with open(path, "r", encoding="utf-8") as fh:
+        return fh.read()
 
 
-def create_k2(stream_length=16):
-    """
-    The function returns 1 random byte streams and k1
-    """
-    return secrets.token_bytes(stream_length)
+def _parse_define(text: str, name: str) -> str:
+    pattern = rf"#define\s+{re.escape(name)}\s+(.+)"
+    match = re.search(pattern, text)
+    if not match:
+        raise ValueError(f"Missing {name} in ectf_params.h")
+    return match.group(1).strip()
 
 
-
-def change_byte_to_const(byte_stream, name)->str:
-    hex_representation = ', '.join([f'0x{byte:02X}' for byte in byte_stream])
-    macro_string = f"const uint8_t {name}[16] = {{ {hex_representation} }};"
-    return macro_string
+def _parse_hex_list(value: str):
+    return [int(item.strip(), 16) for item in value.split(",") if item.strip()]
 
 
-def change_byte_to_noconst(byte_stream, name)->str:
-    hex_representation = ', '.join([f'0x{byte:02X}' for byte in byte_stream])
-    macro_string = f"uint8_t {name}[16] = {{ {hex_representation} }};"
-    return macro_string
+def _parse_c_array(text: str, name: str) -> bytes:
+    pattern = rf"{re.escape(name)}\s*\[[^\]]+\]\s*=\s*\{{([^}}]+)\}}"
+    match = re.search(pattern, text)
+    if not match:
+        raise ValueError(f"Missing {name} in global_secrets.h")
+    values = [v.strip() for v in match.group(1).split(",") if v.strip()]
+    return bytes(int(v, 16) for v in values)
 
 
-# ------------------------------ this is for file Writing and modification --------------------------------------
+def _hkdf_sha256(ikm: bytes, salt: bytes, info: bytes, length: int) -> bytes:
+    prk = hmac.new(salt, ikm, hashlib.sha256).digest()
+    okm = b""
+    t = b""
+    counter = 1
+    while len(okm) < length:
+        t = hmac.new(prk, t + info + bytes([counter]), hashlib.sha256).digest()
+        okm += t
+        counter += 1
+    return okm[:length]
 
 
-# here we define some Global Data:
-shares = []
-macro_information = {}
-
-# End of Global Data Definition:
+def _format_bytes(name: str, data: bytes) -> str:
+    hex_representation = ", ".join(f"0x{b:02X}" for b in data)
+    return f"static const uint8_t {name}[{len(data)}] = {{ {hex_representation} }};"
 
 
-def get_ids(ap_macro):
-    pattern = r"0x[\da-fA-F]+"
-    ids = re.findall(pattern, ap_macro)
-    return ids
+def main() -> None:
+    params_text = _read_file(Path("./inc/ectf_params.h"))
+    secrets_text = _read_file(Path("../deployment/global_secrets.h"))
 
+    pin = _parse_define(params_text, "AP_PIN").strip('"')
+    token = _parse_define(params_text, "AP_TOKEN").strip('"')
+    component_ids = _parse_hex_list(_parse_define(params_text, "COMPONENT_IDS"))
 
-def get_cnt(ap_macro):
-    pattern = r"#define COMPONENT_CNT\s*([\d,]+)"
-    match = re.search(pattern, ap_macro)
+    deployment_id = _parse_c_array(secrets_text, "DEPLOYMENT_ID")
+    kmaster = _parse_c_array(secrets_text, "KMASTER")
 
-    if match:
-        component_cnt = match.group(1)
-        return component_cnt
-    else:
-        print("No match found.")
+    pin_salt = _hkdf_sha256(kmaster, deployment_id, b"PIN_SALT", 16)
+    token_salt = _hkdf_sha256(kmaster, deployment_id, b"TOKEN_SALT", 16)
+    pin_hash = hashlib.sha256(pin.encode("utf-8") + pin_salt).digest()
+    token_hash = hashlib.sha256(token.encode("utf-8") + token_salt).digest()
 
+    component_entries = []
+    for cid in component_ids:
+        info = b"KC" + cid.to_bytes(4, "big")
+        kc = _hkdf_sha256(kmaster, deployment_id, info, 16)
+        component_entries.append((cid, kc))
 
-def get_boot_message(ap_macro):
-    pattern = r'#define AP_BOOT_MSG\s*"([^"]+)"'
-    match = re.search(pattern, ap_macro)
+    with open(Path("./inc/ap_secrets.h"), "w", encoding="utf-8") as fh:
+        fh.write("#ifndef AP_SECRETS_H\n")
+        fh.write("#define AP_SECRETS_H\n\n")
+        fh.write("#include <stdint.h>\n\n")
+        fh.write(_format_bytes("AP_DEPLOYMENT_ID", deployment_id) + "\n")
+        fh.write(_format_bytes("AP_PIN_SALT", pin_salt) + "\n")
+        fh.write(_format_bytes("AP_TOKEN_SALT", token_salt) + "\n")
+        fh.write(_format_bytes("AP_PIN_HASH", pin_hash) + "\n")
+        fh.write(_format_bytes("AP_TOKEN_HASH", token_hash) + "\n\n")
+        fh.write("typedef struct {\n")
+        fh.write("    uint32_t component_id;\n")
+        fh.write("    uint8_t kc[16];\n")
+        fh.write("} ap_component_key_t;\n\n")
+        fh.write(f"#define AP_COMPONENT_KEY_COUNT {len(component_entries)}\n\n")
+        fh.write("static const ap_component_key_t AP_COMPONENT_KEYS[AP_COMPONENT_KEY_COUNT] = {\n")
+        for cid, kc in component_entries:
+            fh.write(f"    {{ 0x{cid:08X}, {{ {', '.join(f'0x{b:02X}' for b in kc)} }} }},\n")
+        fh.write("};\n\n")
+        fh.write("#endif\n")
 
-    # Check if a match is found
-    if match:
-        boot_message = match.group(1)
-        return boot_message
-    else:
-        print("No match found.")
+    legacy_key = _hkdf_sha256(kmaster, deployment_id, b"LEGACY_KEY", 16)
+    legacy_mask1 = _hkdf_sha256(kmaster, deployment_id, b"LEGACY_M1", 16)
+    legacy_mask2 = _hkdf_sha256(kmaster, deployment_id, b"LEGACY_M2", 16)
+    legacy_final1 = _hkdf_sha256(kmaster, deployment_id, b"LEGACY_F1", 16)
+    legacy_final2 = _hkdf_sha256(kmaster, deployment_id, b"LEGACY_F2", 16)
 
+    with open(Path("./inc/key.h"), "w", encoding="utf-8") as fh:
+        fh.write("#ifndef __KEY__\n")
+        fh.write("#define __KEY__\n")
+        fh.write("#include <stdint.h>\n\n")
+        fh.write("extern const uint8_t KEY_SHARE[16];\n")
+        fh.write("extern const uint8_t M1[16];\n")
+        fh.write("extern const uint8_t F1[16];\n")
+        fh.write("extern const uint8_t M2[16];\n")
+        fh.write("extern const uint8_t F2[16];\n")
+        fh.write("#endif\n")
 
-def get_token(ap_macro):
-    pattern = r'#define AP_TOKEN\s*"([^"]+)"'
-    match = re.search(pattern, ap_macro)
+    with open(Path("./src/key.c"), "w", encoding="utf-8") as fh:
+        fh.write("#include \"key.h\"\n")
+        fh.write(_format_bytes("KEY_SHARE", legacy_key) + "\n")
+        fh.write(_format_bytes("M1", legacy_mask1) + "\n")
+        fh.write(_format_bytes("F1", legacy_final1) + "\n")
+        fh.write(_format_bytes("M2", legacy_mask2) + "\n")
+        fh.write(_format_bytes("F2", legacy_final2) + "\n")
 
-    # Check if a match is found
-    if match:
-        boot_message = match.group(1)
-        return boot_message
-    else:
-        print("No match found.")
-
-
-def get_pin(ap_macro):
-    pattern = r'#define AP_PIN\s*"([^"]+)"'
-    match = re.search(pattern, ap_macro)
-
-    # Check if a match is found
-    if match:
-        boot_message = match.group(1)
-        return boot_message
-    else:
-        print("No match found.")
-
-
-def extract_info():
-    """
-    Pure helper function that put everything into the global data of macro
-    """
-    fh = open(Path("./inc/ectf_params.h"), "r")
-    lines = fh.readlines()
-    fh.close()
-    macro_information["pin"] = get_pin(lines[2])
-    macro_information["token"] = get_token(lines[3])
-    macro_information["ids"] = get_ids(lines[4])
-    macro_information["cnt"] = get_cnt(lines[5])
-    macro_information["message"] = get_boot_message(lines[6])
-
-    return
-
-
-def get_file_paths() -> list:
-    """
-    This gets the file paths for AP, Components
-
-    Returns:
-        list: [Path For Component1, Path for Component 2, Count of Components]
-    """
-    ids = macro_information["ids"]
-    count = macro_information["cnt"]
-    if count == "1":
-        return [ids[0] + ".txt", count]
-    else:
-        return [ids[0] + ".txt", ids[1] + ".txt", count]
-
-    
-
-def file_exist(file_path)->bool:
-    if file_path.exists():
-        return True
-    else:
-        return False
-
-
-def read_key_from_files(file_paths: list) -> None:
-    """
-    Given some paths for component, writes the key shares repsectively to the file
-    Also write everything back to the AP file, encrypted, of course
-    """
-
-
-    # else:
-    comp_val=0
-    k2=create_k2(16)
-    masks=['', '', '', '']
-    for index in range(len(macro_information["ids"])):
-        comp_val += 1
-        if file_exist(Path(f"../deployment/{macro_information['ids'][index]}.txt")):
-            fh = open(f"../deployment/{macro_information['ids'][index]}.txt", "r")
-            lines = fh.readlines()
-            fh.close()
-            #Read M
-            masks[index]=lines[1] 
-            #Read F
-            masks[index + 2]=lines[2]
-        else:
-            masks[index]=change_byte_to_const("0000000000000000".encode(),f'M{index + 1}')
-            masks[index + 2]=change_byte_to_const("0000000000000000".encode(),f'F{index + 1}')
-
-    
-    fh = open("./inc/key.h", "w")
-    fh.write("#ifndef __KEY__\n")
-    fh.write("#define __KEY__\n")
-    fh.write("#include <stdint.h> \n")
-    fh.write(change_byte_to_const(k2,"KEY_SHARE")+"\n")
-    if comp_val==1:
-        fh.write(masks[0].replace("MASK", "M1"))
-        fh.write(masks[2].replace("FINAL_MASK", "F1"))
-        masks[1]=change_byte_to_const("0000000000000000".encode(),f'M{2}')
-        masks[3]=change_byte_to_const("0000000000000000".encode(),f'F{2}')
-        fh.write(masks[1].replace("MASK", "M2")+"\n")
-        fh.write(masks[3].replace("FINAL_MASK", "F2")+"\n")
-    else:
-        fh.write(masks[0].replace("MASK", "M1"))
-        fh.write(masks[2].replace("FINAL_MASK", "F1"))
-        fh.write(masks[1].replace("MASK", "M2"))
-        fh.write(masks[3].replace("FINAL_MASK", "F2")+"\n")
-    fh.write("#endif\n")
-    fh.close()
-
-def get_secret_key_from_csv(filename, row):
-    # Read the secret key from the CSV file
-    with open(filename, 'r') as csvfile:
-        reader = csv.reader(csvfile)
-        for i, line in enumerate(reader):
-            if i == row:
-                #print("Secret key: {}".format(line[0]))
-                return line[0]
-
-
-def component_id_to_i2c_addr(component_id):
-    COMPONENT_ADDR_MASK = 0x000000FF
-    return component_id & COMPONENT_ADDR_MASK
-            
-def write_key_to_files():
-    """
-    Given some paths for component, writes the key shares repsectively to the file
-    Also write everything back to the AP file, encrypted, of course
-    """
-    indexs = []
-
-            
-    for i in range(int(macro_information["cnt"])):
-        indexs.append(component_id_to_i2c_addr(int(macro_information["ids"][i], 16)))
-    mask = []
-    final = []
-    if file_exist(Path(f"../deployment/cc.csv")):
-        for i in indexs:
-            mask.append(get_secret_key_from_csv(Path(f"../deployment/cc.csv"), int(i)*2))
-            final.append(get_secret_key_from_csv(Path(f"../deployment/cc.csv"), int(i)*2+1))
-    else:
-        print("No file found")
-        print("error")
-        return
-    k2 = secrets.token_bytes(16)
-    fh = open("./inc/key.h", "w")
-    fh.write("#ifndef __KEY__\n")
-    fh.write("#define __KEY__\n")
-    fh.write("#include <stdint.h> \n")
-    fh.write("extern uint8_t KEY_SHARE[16];\n")
-    fh.write("extern const uint8_t M1[16];\n")
-    fh.write("extern const uint8_t F1[16];\n")
-    fh.write("extern const uint8_t M2[16];\n")
-    fh.write("extern const uint8_t F2[16];\n")
-    fh.write("#endif\n")
-    fh.close()
-    fh = open("./src/key.c", "w")
-    fh.write("#include \"key.h\" \n")
-    fh.write(change_byte_to_noconst(k2,"KEY_SHARE")+"\n")
-    if len(indexs) == 1:
-        fh.write(mask[0].replace("MASK", "M1") + "\n")
-        fh.write(final[0].replace("FINAL_MASK", "F1") + "\n")
-        fh.write(change_byte_to_const(secrets.token_bytes(16),"M2")+"\n")
-        fh.write(change_byte_to_const(secrets.token_bytes(16),"F2")+"\n")
-    else:
-        fh.write(mask[0].replace("MASK", "M1") + "\n")
-        fh.write(final[0].replace("FINAL_MASK", "F1") + "\n")
-        fh.write(mask[1].replace("MASK", "M2") + "\n")
-        fh.write(final[1].replace("FINAL_MASK", "F2")+"\n")
-    fh.close()
-    
-
-    
-    
-
-
-# ------------------------------ End of Previous Deinition, this is the main file -----------------------------------
 
 if __name__ == "__main__":
-    # this is for test running
-    extract_info()
-    # str = str(macro_information) + " "+ str(component_id_to_i2c_addr(int(macro_information["ids"][0], 16))) + " " + str(component_id_to_i2c_addr(int(macro_information["ids"][1], 16)))
-    # sys.stderr.write(str)
-    #read_key_from_files(get_file_paths())
-    write_key_to_files()
+    main()

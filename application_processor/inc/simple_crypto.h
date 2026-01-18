@@ -17,11 +17,14 @@
 
 #include "wolfssl/wolfcrypt/aes.h"
 #include "wolfssl/wolfcrypt/hash.h"
+#include "wolfssl/wolfcrypt/sha256.h"
+#include "wolfssl/wolfcrypt/hmac.h"
 
 /******************************** MACRO DEFINITIONS ********************************/
 #define BLOCK_SIZE AES_BLOCK_SIZE
 #define KEY_SIZE 16
-#define HASH_SIZE MD5_DIGEST_SIZE
+#define HASH_SIZE 32
+#define AEAD_TAG_SIZE 16
 
 /******************************** FUNCTION PROTOTYPES ********************************/
 /** @brief Encrypts plaintext using a symmetric cipher
@@ -64,7 +67,19 @@ int decrypt_sym(uint8_t *ciphertext, size_t len, uint8_t *key, uint8_t *plaintex
  *
  * @return 0 on success, non-zero for other error
  */
-int hash(void *data, size_t len, uint8_t *hash_out);
+int hash(const uint8_t *data, size_t len, uint8_t *hash_out);
+int hash_sha256(const uint8_t *data, size_t len, uint8_t *hash_out);
+int hkdf_sha256(const uint8_t *salt, size_t salt_len, const uint8_t *ikm,
+				size_t ikm_len, const uint8_t *info, size_t info_len,
+				uint8_t *okm, size_t okm_len);
+int aead_encrypt_gcm(const uint8_t *key, const uint8_t *nonce, size_t nonce_len,
+					 const uint8_t *aad, size_t aad_len, const uint8_t *plaintext,
+					 size_t plaintext_len, uint8_t *ciphertext, uint8_t *tag,
+					 size_t tag_len);
+int aead_decrypt_gcm(const uint8_t *key, const uint8_t *nonce, size_t nonce_len,
+					 const uint8_t *aad, size_t aad_len, const uint8_t *ciphertext,
+					 size_t ciphertext_len, const uint8_t *tag, size_t tag_len,
+					 uint8_t *plaintext);
 
 #endif // CRYPTO_EXAMPLE
 #endif // ECTF_CRYPTO_H

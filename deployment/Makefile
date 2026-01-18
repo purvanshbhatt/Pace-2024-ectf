@@ -8,8 +8,6 @@ __check_defined = \
 
 all:
 	python import_csv.py
-	echo "#define SECRET 1234" > global_secrets.h
 
 clean:
-	rm -f cc.csv
 	rm -f global_secrets.h
